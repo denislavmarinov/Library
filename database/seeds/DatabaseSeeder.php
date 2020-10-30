@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use App\Role;
+use App\Genre;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+
+        Role::truncate();
+        User::truncate();
+        Genre::truncate();
+
+        $usersQuantity = 50;
+        $genresQuantity = 50;
+
+
+        $this->call(RolesSeeder::class);
+        factory(User::class, $usersQuantity)->create();
+        factory(Genre::class, $genresQuantity)->create();
     }
 }
