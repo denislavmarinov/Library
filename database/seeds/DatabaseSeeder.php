@@ -5,6 +5,7 @@ use App\Role;
 use App\Genre;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
