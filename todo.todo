@@ -11,7 +11,7 @@ Urgent
 
 	!-5 Make all migrations:
 		+-2 Users
-		-2 Authors
+		+-2 Authors
 		+-2 Books
 		+-2 Books_users
 		+-2 Genres
