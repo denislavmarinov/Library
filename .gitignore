@@ -4,6 +4,8 @@
 /public/storage
 /storage/*.key
 /vendor
+*.sublime-project
+*.sublime-workspace
 .env
 .env.backup
 .phpunit.result.cache
