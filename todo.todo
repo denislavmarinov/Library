@@ -1,0 +1,60 @@
+/*
+
+		To do list of Library Project
+
+*/
+
+Tasks:
+
+Urgent
+------------------------------
+
+	!-5 Make all migrations:
+		+-2 Users
+		-2 Authors
+		+-2 Books
+		+-2 Books_users
+		+-2 Genres
+		-2 Countries: could be named `Nationalities`
+		+-2 Roles
+		-2 Users_speed
+		+-2 Notifications
+		+-2 Notifications_users
+		+-2 Wishlist
+
+Important
+------------------------------
+.
+	-4 Make all models
+	-4 Add factories and seeders for all tables:
+		+-2 Users
+		-2 Authors
+		-2 Books
+		-2 Books_users
+		+-2 Genres
+		-2 Countries: could be named `Nationalities`
+		+-2 Roles
+		-2 Users_speed
+		-2 Notifications
+		-2 Notifications_users
+		-2 Wishlist
+
+Not so important
+------------------------------
+
+	-3 Make all controllers: only as a structure
+	-3 Make authentication views and controllers
+	-3 Make homepage view
+	-3 Make Authors controller and view
+	-3 Make Book controller and view
+	-3 Make Genres controller and view
+	-3 Make Countries controller and view: also could be names as `Nationalities`
+	-3 Make Notifications controller and view
+	-3 Make Wishlist controller and view
+	-3 Add validation to all forms
+
+Easy Tasks
+------------------------------
+
+	-2 Add ThreeJS into project: via npm
+	-2 Add ThreeJS loader
