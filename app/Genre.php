@@ -8,7 +8,7 @@ class Genre extends Model
 {
     protected $fillable = ['genre', 'description'];
 
-    public function books ()
+    public function book ()
     {
         return $this->hasMany('App\Book');
     }

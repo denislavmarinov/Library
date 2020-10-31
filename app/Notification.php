@@ -8,12 +8,12 @@ class Notification extends Model
 {
     protected $fillable = ['notification', 'description', 'book'];
 
-    public function books ()
+    public function book ()
     {
         return $this->hasOne('App\Book');
     }
 
-    public function users ()
+    public function user ()
     {
         return $this->hasMany('App\User');
     }
