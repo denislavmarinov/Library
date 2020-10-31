@@ -27,7 +27,7 @@ Important
 ------------------------------
 
 	+-4 Make all models
-	-4 Add relationships for each model:
+	+-4 Add relationships for each model:
 		-2 Users
 			-1 Users -> Roles
 			-1  Users -> Books
@@ -62,16 +62,16 @@ Important
 			-1  Wishlist -> Books
 	-4 Add factories and seeders for all tables:
 		+-2 Users
-		-2 Authors
-		-2 Books
-		-2 Books_users
+		+-2 Authors
+		+-2 Books
+		+-2 Books_users
 		+-2 Genres
-		-2 Countries: could be named `Nationalities`
+		+-2 Countries: could be named `Nationalities`
 		+-2 Roles
-		-2 Users_speed
-		-2 Notifications
-		-2 Notifications_users
-		-2 Wishlist
+		+-2 Users_speed
+		+-2 Notifications
+		+-2 Notifications_users
+		+-2 Wishlist
 
 Not so important
 ------------------------------

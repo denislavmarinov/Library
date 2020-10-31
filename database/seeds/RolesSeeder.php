@@ -2,6 +2,7 @@
 
 use App\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RolesSeeder extends Seeder
 {
@@ -14,15 +15,17 @@ class RolesSeeder extends Seeder
     {
         $roles = [
             [
-                'role' => 'plain_user'
+                'role' => 'plain_user',
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
-                'role' => 'admin'
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ];
 
-        foreach ($roles as $role) {
-            Role::create($roles);
-        }
+        DB::table('roles')->insert($roles);
     }
 }
