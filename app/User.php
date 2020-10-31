@@ -37,7 +37,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function notifications ()
+    public function notification ()
     {
         return $this->hasMany('App\Notification');
     }
@@ -47,9 +47,19 @@ class User extends Authenticatable
         return $this->hasMany('App\Book');
     }
 
-    public function roles ()
+    public function role ()
     {
         return $this->hasOne('App\Role');
     }
 
+
+    public function user_speed ()
+    {
+        return $this->hasMany('App\User_speed');
+    }
+
+    public function wishlist ()
+    {
+        return $this->hasMany('App\Wishlist');
+    }
 }

@@ -27,38 +27,38 @@ Important
 ------------------------------
 
 	+-4 Make all models
-	-4 Add relationships for each model:
-		-2 Users
-			-1  Users -> Roles
-			-1  Users -> Books
-			-1  Users -> User_speed
-			-1  Users -> Notificatioins
-			-1  Users -> Wishlist
-		-2 Authors
-			-1  Authors -> Nationalities
-			-1  Authors -> Books
-		-2 Books
-			-1  Books -> Authors
-			-1  Books -> Users
-			-1  Books -> Genres
-			-1  Books -> Notifications
-			-1  Books -> Wishlist
-		-2 Books_users:model does not exists
-		-2 Genres
-			-1  Genres -> Books
-		-2 Countries: could be named `Nationalities`
-			-1  Nationalities -> Authors
-		-2 Roles
-			-1  Roles -> Users
-		-2 Users_speed
-			-1  User_speed -> Users
-		-2 Notifications
-			-1  Notificatioins -> Books
-			-1  Notifications -> Users
-		-2 Notifications_users: model does not exist
-		-2 Wishlist
-			-1  Wishlist -> Users
-			-1  Wishlist -> Books
+	+-4 Add relationships for each model:
+		+-2 Users
+			+-1  Users -> Roles
+			+-1  Users -> Books
+			+-1  Users -> User_speed
+			+-1  Users -> Notificatioins
+			+-1  Users -> Wishlist
+		+-2 Authors
+			+-1  Authors -> Nationalities
+			+-1  Authors -> Books
+		+-2 Books
+			+-1  Books -> Authors
+			+-1  Books -> Users
+			+-1  Books -> Genres
+			+-1  Books -> Notifications
+			+-1  Books -> Wishlist
+		+-2 Books_users:model does not exists
+		+-2 Genres
+			+-1  Genres -> Books
+		+-2 Countries: could be named `Nationalities`
+			+-1  Nationalities -> Authors
+		+-2 Roles
+			+-1  Roles -> Users
+		+-2 Users_speed
+			+-1  User_speed -> Users
+		+-2 Notifications
+			+-1  Notificatioins -> Books
+			+-1  Notifications -> Users
+		+-2 Notifications_users: model does not exist
+		+-2 Wishlist
+			+-1  Wishlist -> Users
+			+-1  Wishlist -> Books
 	-4 Add factories and seeders for all tables:
 		+-2 Users
 		-2 Authors
