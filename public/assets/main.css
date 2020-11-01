@@ -1,0 +1,11 @@
+body{
+    margin-top: 15px !important;
+    text-indent: 1.5;
+    font-size: 20px;
+    font-family: Mali;
+}
+.page_title{
+    text-align: center;
+    text-shadow:  #ccc 5px 5px;
+    font-size: 45px;
+}
