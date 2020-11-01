@@ -60,7 +60,7 @@ Important
 		-2 Wishlist
 			-1 Wishlist -> Users
 			-1  Wishlist -> Books
-	-4 Add factories and seeders for all tables:
+	+-4 Add factories and seeders for all tables:
 		+-2 Users
 		+-2 Authors
 		+-2 Books
@@ -72,6 +72,11 @@ Important
 		+-2 Notifications
 		+-2 Notifications_users
 		+-2 Wishlist
+	-4 Add link to the font-family ( Mali ): in `main.blade.php`
+	-4 Add a middleware to filter the users, which could access methods and controllers
+	-4 Views/Controllers/Methods, which will be accessible only for admins:
+		-3 Roles: the whole controller
+
 
 Not so important
 ------------------------------
