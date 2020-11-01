@@ -14,6 +14,6 @@ $factory->define(Author::class, function (Faker $faker) {
             'date_of_death'      =>$faker->boolean(50) ? date_format($faker->dateTimeBetween('01-01-2000', now()), "Y-m-d" ): null,
             'nationality'            =>Nationality::all()->random()->id,
             'biographic'           =>$faker->text(1000),
-            'image'                  =>$faker->sentences(1, true)
+            'image'                  =>$faker->paragraph
     ];
 });

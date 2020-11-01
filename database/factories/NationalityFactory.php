@@ -9,6 +9,6 @@ $factory->define(Nationality::class, function (Faker $faker) {
     return [
                 'nationality'   =>$faker->country,
                 'history_link'  =>$faker->url,
-                'flag'             =>$faker->sentences(1, true)
+                'flag'             =>$faker->paragraph
     ];
 });
