@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/bootstrap.css') }}">
     <!-- Link for project stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/main.css') }}">
-    <!-- To add link for the font-family (Mali) -->
+    <!-- Link for the font-family (Mali) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mali&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">

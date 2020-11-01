@@ -23,6 +23,11 @@ class RolesSeeder extends Seeder
                 'role' => 'admin',
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'role' => 'author',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ];
 

@@ -9,3 +9,14 @@ body{
     text-shadow:  #ccc 5px 5px;
     font-size: 45px;
 }
+
+.btn-outline-teal{
+	color: #20c997;
+	border-color: #20c997;
+}
+
+.btn-outline-teal:hover {
+	color: #fff;
+	background-color: #20c997;
+	border-color: #20c997;
+}
