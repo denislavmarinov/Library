@@ -17,7 +17,7 @@ $factory->define(Book::class, function (Faker $faker) {
             'author' => Author::all()->random()->id,
             'edition' => $faker->numberBetween(1, 12),
             'genre' => Genre::all()->random()->id,
-            'file_path' => $faker->image('storage', 250, 250),
+            'file_path' => $faker->sentences(1, true),
             'added_by'  => User::all()->random()->id
     ];
 });
