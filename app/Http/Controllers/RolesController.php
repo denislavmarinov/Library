@@ -29,12 +29,16 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        $role = DB::table('roles')
-                    ->join('users', 'roles.id', '=', 'users.role_id')
-                    ->select('roles.*', 'users.*')
-                    ->where('users.role_id', '=', $role->id)
-                    ->get();
+        $role = Role::show_roles_with_users($role);
+        $roles = Role::all();
 
-        return view('roles.show', compact('role'));
+        $roles = $roles->pluck('role', 'id');
+
+        foreach ($roles as $k => $v)
+        {
+            $roles[$k] = ucfirst(str_replace('_', ' ', $v));
+        }
+
+        return view('roles.show', compact('role', 'roles'));
     }
 }

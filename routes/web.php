@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Homepage route
 Route::get('/', function () {
     return view('home');
 })->name('homepage');
 
 
 // Roles routes
-Route::resource('roles', 'RolesController');
+Route::get('/roles', 'RolesController@index')->name('roles.index'); // Page where all roles are listed
+Route::get('/roles/{role}', 'RolesController@show')->name('roles.show'); // Page where the users. which has selected role are listed
+
+// Users routes
+Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role

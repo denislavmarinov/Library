@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Role;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -61,5 +63,12 @@ class User extends Authenticatable
     public function wishlist ()
     {
         return $this->hasMany('App\Wishlist');
+    }
+
+    public static function change_user_role ($user_id, $role_id)
+    {
+        return DB::table('users')
+                    ->where('id', $user_id)
+                    ->update(['role_id' => $role_id]);
     }
 }
