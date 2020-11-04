@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name',  'role_id', 'image', 'logged', 'email', 'password',
+        'first_name', 'last_name',  'role_id', 'image', 'logged', 'email', 'password'
     ];
 
     /**
@@ -70,5 +70,13 @@ class User extends Authenticatable
         return DB::table('users')
                     ->where('id', $user_id)
                     ->update(['role_id' => $role_id]);
+    }
+
+    public static function get_all_users_with_roles ()
+    {
+        return DB::table('users')
+                    ->join('roles', 'users.role_id', '=', 'roles.id')
+                    ->orderBy('users.updated_at', 'ASC')
+                    ->get();
     }
 }

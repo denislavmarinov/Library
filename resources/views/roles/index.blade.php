@@ -1,4 +1,6 @@
-<?php $title = "Roles"; ?>
+@php
+    $title = "Roles";
+ @endphp
 @extends('layouts/main')
 @section('title')
     <h1 class="page_title">Roles</h1>
@@ -19,7 +21,7 @@
     @foreach ($roles as $role)
         <tr>
             <td>{{ $num++ }}</td>
-            <td><a href="{{ route('roles.show', $role->id) }}">{{ $role->role }}</a></td>
+            <td><a href="{{ route('roles.show', $role->id) }}">{{ucfirst(str_replace('_', ' ', $role->role )) }}</a></td>
             <td>{{ $role->user->count() }}</td>
         </tr>
     @endforeach

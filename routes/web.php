@@ -25,3 +25,8 @@ Route::get('/roles/{role}', 'RolesController@show')->name('roles.show'); // Page
 
 // Users routes
 Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role
+Route::get('/users', 'UsersController@index')->name('users.list');  // The list of all users in the app (visible only for admins)
+Route::put('/users/require_change_password', 'UsersController@require_change_password')->name('require_change_password');
+
+// Books routes
+Route::resource('books', 'BooksController');
