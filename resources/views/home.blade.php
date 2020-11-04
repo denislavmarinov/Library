@@ -1,4 +1,6 @@
-<?php $title = "Homepage"; ?>
+@php
+ 	$title = "Homepage";
+ @endphp
 @extends('layouts/main')
 @section('title')
     <h1 class="page_title">Welcome to our Library</h1>

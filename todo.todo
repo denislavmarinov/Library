@@ -74,6 +74,7 @@ Important
 		+-2 Wishlist
 	+-4 Add link to the font-family ( Mali ): in `main.blade.php`
 	-4 Add a middleware to filter the users, which could access methods and controllers
+	-4 Add image to books.show: for the moment of writting there are only a text the <p> tag should be changed with <img> with width 250  (other sizes could also be accepted)
 	-4 Views/Controllers/Methods, which will be accessible only for admins:
 		-3 Roles: the whole controller
 
