@@ -24,7 +24,7 @@
 <body>
     <div class="container">
         @yield('title')
-        @include('includes.menu')
+        @include('includes.user_menu')
         @yield('content')
     </div>
 </body>
