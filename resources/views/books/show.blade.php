@@ -1,7 +1,7 @@
 @php
 	$title = ucfirst(str_replace('_', ' ', $book->title)) . " book";
 @endphp
-@extends('layouts/main')
+@extends('layouts/user')
 @section('title')
     <h1 class="page_title">Book:  {{ ucfirst(str_replace('_', ' ', $book->title)) }}</h1>
 @endsection

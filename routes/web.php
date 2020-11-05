@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Homepage route
-Route::get('/', function () {
+Route::get('home', function () {
     return view('home');
 })->name('homepage');
 
@@ -27,6 +27,13 @@ Route::get('/roles/{role}', 'RolesController@show')->name('roles.show'); // Page
 Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role
 Route::get('/users', 'UsersController@index')->name('users.list');  // The list of all users in the app (visible only for admins)
 Route::put('/users/require_change_password', 'UsersController@require_change_password')->name('require_change_password');
+Route::get('/user_dashboard', function(){
+	return view('user_dashboard.user_dashboard');
+})->name('user_dashboard');
 
 // Books routes
 Route::resource('books', 'BooksController');
+
+// Route for user authentication
+Auth::routes();
+

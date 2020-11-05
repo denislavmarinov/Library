@@ -1,5 +1,7 @@
-<?php $title = "User list"; ?>
-@extends('layouts/main')
+@php
+    $title = "User list";
+@endphp
+@extends('layouts/user')
 @section('title')
     <h1 class="page_title">User list</h1>
 @endsection

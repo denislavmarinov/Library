@@ -79,4 +79,16 @@ class User extends Authenticatable
                     ->orderBy('users.updated_at', 'ASC')
                     ->get();
     }
+    public static function logged_field_to_false ($user_id)
+    {
+        return DB::table('users')
+                    ->where('id', '=', $user_id)
+                    ->update(['logged' => '0']);
+    }
+    public static function logged_field_to_true ($user_id)
+    {
+        return DB::table('users')
+                    ->where('id', '=', $user_id)
+                    ->update(['logged' => '1']);
+    }
 }
