@@ -30,4 +30,10 @@
     <li class="nav-item">
         <a class="nav-link" href="#">Wishlists</a>
     </li>
+    <li class="nav-item">
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <input class="nav-link" type="submit" name="submit" value="{{ __('Logout') }}">
+        </form>
+    </li>
 </ul>

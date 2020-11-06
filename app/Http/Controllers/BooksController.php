@@ -6,6 +6,8 @@ use App\Book;
 use App\Genre;
 use App\Author;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -48,13 +50,21 @@ class BooksController extends Controller
     public function create()
     {
     	// If the admin is uploading the book get all authors, otherwise the logged users name and id should be sent
-        $authors = Author::get_all_authors();
-        for ($i = 0; $i < count($authors); $i++)
+        if (Auth::user()->role_id == '3')
         {
-        	$authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
+            $authors = [Auth::id() => Auth::user()->first_name . ' ' . Auth::user()->last_name];
         }
-        $authors = $authors_temp;
-        // $authors = $authors->pluck('author_name', 'id');
+        else
+        {
+            $authors = Author::get_all_authors();
+
+            for ($i = 0; $i < count($authors); $i++)
+            {
+            	$authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
+            }
+            $authors = $authors_temp;
+        }
+
         $genres = Genre::get_all_genres();
         $genres = $genres->pluck('genre', 'id');
         return view('books.create', compact('authors', 'genres'));
@@ -66,9 +76,32 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        //
+        $book = [
+            'title' => $request->title,
+            'isbn' => $request->isbn,
+            'pages' => $request->pages,
+            'short_content' => $request->short_content,
+            'author' => $request->author,
+            'edition' => $request->edition,
+            'genre' => $request->genre,
+            'file_path' => ' ',
+            'added_by' => Auth::user()->id
+        ];
+
+        dd($book);
+
+        $result = Book::add_new_book($book);
+
+        if ($result)
+        {
+            return redirect()->route('books.index')->with('message', 'Book successfully added!');
+        }
+        else
+        {
+            return redirect()->route('books.index')->with('message', 'Something went wrong try again later!!');
+        }
     }
 
     /**
@@ -79,7 +112,7 @@ class BooksController extends Controller
      */
     public function show(Book $book)
     {
-        $books = Book::get_all_books_with_authors_and_genres();
+        $books = Book::get_book_to_show($book->id);
 
         $book = $books[0];
 
@@ -94,7 +127,17 @@ class BooksController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $book = Book::select_book_to_update($book->id);
+
+        $authors = Author::select_author($book->first()->author);
+        $authors = [
+            $authors[0]->id => $authors[0]->author_name
+        ];
+
+        $genres = Genre::get_all_genres();
+        $genres = $genres->pluck('genre', 'id');
+
+        return view('books.edit', compact('book', 'authors', 'genres'));
     }
 
     /**
@@ -104,9 +147,30 @@ class BooksController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        //
+        $new_book = [
+            'title' => $request->title,
+            'isbn' => $request->isbn,
+            'pages' => $request->pages,
+            'short_content' => $request->short_content,
+            'author' => $request->author,
+            'edition' => $request->edition,
+            'genre' => $request->genre
+        ];
+
+        $result = Book::update_book($book->id, $new_book);
+
+        if ($result)
+        {
+            return redirect()->route('books.show', $book->id)->with('message', 'Book was successfully updated');
+        }
+        else
+        {
+            return redirect()->route('books.show', $book->id)->with('message', 'Something went wrong! Try again later!');
+        }
+
+
     }
 
     /**
@@ -117,6 +181,15 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $result = Book::delete_book($book->id);
+
+        if ($result)
+        {
+            return redirect()->route('books.index')->with('message', 'Book was successfully deleted!');
+        }
+        else
+        {
+            return redirect()->route('books.index')->with('message', 'Something went wrong! Try again later!');
+        }
     }
 }
