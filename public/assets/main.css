@@ -61,3 +61,7 @@ body{
     width: 10em;
     display: inline-block !important;
 }
+
+.invalid-feedback{
+    display: inline-block !important;
+}

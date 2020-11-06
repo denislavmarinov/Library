@@ -27,6 +27,7 @@ class LoginController extends Controller
     use AuthenticatesUsers
     {
         login as public default_login;
+        logout as public default_logout;
     }
 
     /**
@@ -93,7 +94,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         User::logged_field_to_false(Auth::id());
-        Auth::logout();
+        $this->default_logout($request);
         return redirect()->route('homepage')->with('message', 'Successfully logouted!');
     }
 }
