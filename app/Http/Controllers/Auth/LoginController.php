@@ -58,8 +58,25 @@ class LoginController extends Controller
      */
      public function login (Request $request)
      {
+        // Check if the email exist
+        $check_if_email_exist = User::check_if_email_exist($request->email);
+
+        if ($check_if_email_exist->count() <= 0)
+        {
+            return redirect()->route('login')->with('message', "Email does not exist in our records!");
+        }
+
+        // Check if the user is logged in another device
+        $check_if_user_is_logged_in = User::check_if_user_is_logged_in($request->email);
+
+        if ($check_if_user_is_logged_in[0]->logged)
+        {
+            return redirect()->route('login')->with('message', "Firstly logout from the other device then try again!");
+        }
+        // Make the login
          $response = $this->default_login($request);
 
+         // Set the logged column in database to true
          if (Auth::user())
          {
             User::logged_field_to_true(Auth::id());
