@@ -91,4 +91,18 @@ class User extends Authenticatable
                     ->where('id', '=', $user_id)
                     ->update(['logged' => '1']);
     }
+    public static function check_if_user_is_logged_in ($email)
+    {
+        return DB::table('users')
+                ->select('logged')
+                ->where('email', '=', $email)
+                ->get();
+    }
+    public static function check_if_email_exist ($email)
+    {
+        return DB::table('users')
+                    ->select('email')
+                    ->where('email', '=', $email)
+                    ->get();
+    }
 }

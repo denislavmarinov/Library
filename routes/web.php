@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Homepage route
-Route::get('home', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('homepage');
 
