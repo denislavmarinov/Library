@@ -6,9 +6,6 @@
     <h1 class="page_title">Roles</h1>
 @endsection
 @section('content')
-@if (Session::has('message'))
-    <script type="text/javascript">alert('{{ Session::get('message' )}}');</script>
-@endif
 <table class="table">
     <tr>
         <td>#</td>

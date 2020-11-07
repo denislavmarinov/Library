@@ -32,6 +32,16 @@ body{
     background-color: #17a2b8;
     border-color: #17a2b8;
 }
+.btn-outline-red{
+    color: #f00;
+    border-color: #f00;
+}
+
+.btn-outline-red:hover {
+    color: #fff;
+    background-color: #f00;
+    border-color: #f00;
+}
 /*Scrollbar*/
 ::-webkit-scrollbar{
     width: 10px;

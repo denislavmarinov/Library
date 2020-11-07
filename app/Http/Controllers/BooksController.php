@@ -8,6 +8,7 @@ use App\Author;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class BooksController extends Controller
 {
@@ -190,6 +191,64 @@ class BooksController extends Controller
         else
         {
             return redirect()->route('books.index')->with('message', 'Something went wrong! Try again later!');
+        }
+    }
+
+    public function start_reading (Book $book)
+    {
+        $book_user = [
+            'book' => $book->id,
+            'user' => Auth::id(),
+            'up_to_page' => '0',
+            'started_to_read' => now(),
+            'ended_to_read' => null,
+            'read' => '0'
+        ];
+
+        $result = Book::add_book_to_readlist($book_user);
+
+        if ($result)
+        {
+            return redirect()->route('read_book', $book->id)->with('message', 'Successfully added book to readlist!');
+        }
+        else
+        {
+            return redirect()->route('books.show', $book->id)->with('message', 'Something went wrong! Please try again later!');
+        }
+
+    }
+    public function read_book (Book $book)
+    {
+        return view('books.read_book');
+    }
+
+    public function readlist ()
+    {
+        $books = Book::get_all_books_with_authors_genres_that_user_read(Auth::id());
+
+        foreach ($books as $book)
+        {
+            $book->started_to_read = Carbon::parse($book->started_to_read);
+            if ($book->ended_to_read !== null)
+            {
+                $book->ended_to_read = Carbon::parse($book->ended_to_read);
+            }
+        }
+
+        return view('books.readlist', compact('books'));
+    }
+
+    public function delete_book_from_readlist (Book $book)
+    {
+        $result = Book::delete_book_from_user_read_list(Auth::id(), $book->id);
+
+        if ($result)
+        {
+            return redirect()->route('readlist')->with('message', "Successfully deleted from readlist!");
+        }
+        else
+        {
+            return redirect()->route('readlist')->with('message', "Something went wrong!");
         }
     }
 }

@@ -25,6 +25,9 @@
     <div class="container">
         @yield('title')
         @include('includes.menu')
+        @if (Session::has('message'))
+           <script type="text/javascript">alert('{{ Session::get('message' )}}');</script>
+        @endif
         @yield('content')
     </div>
 </body>

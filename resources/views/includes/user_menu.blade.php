@@ -28,7 +28,7 @@
         <a class="nav-link" href="#">User speed</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Wishlists</a>
+        <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlists</a>
     </li>
     <li class="nav-item">
         <form action="{{ route('logout') }}" method="post">
