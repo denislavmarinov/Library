@@ -67,5 +67,6 @@ class DatabaseSeeder extends Seeder
         sleep(3);
         $this->call(WishlistSeeder::class);
         sleep(3);
+        $this->call(FixedUsersSeeder::class);
     }
 }

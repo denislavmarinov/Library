@@ -1,5 +1,6 @@
 body{
     margin-top: 15px !important;
+    margin-bottom: 15px !important;
     text-indent: 1.5;
     font-size: 20px;
     font-family: Mali;
@@ -19,4 +20,58 @@ body{
 	color: #fff;
 	background-color: #20c997;
 	border-color: #20c997;
+}
+
+.btn-outline-cyan{
+    color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-outline-cyan:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-outline-red{
+    color: #f00;
+    border-color: #f00;
+}
+
+.btn-outline-red:hover {
+    color: #fff;
+    background-color: #f00;
+    border-color: #f00;
+}
+/*Scrollbar*/
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    /*Should be changes only as an example*/
+    background: #2564f3;
+}
+
+::-webkit-scrollbar-thumb{
+    /*Should be changes only as an example*/
+    background: #f94ab3
+}
+
+::-webkit-scrollbar-thumb:hover{
+    /*Should be changes only as an example*/
+    background: #f00
+}
+
+::-webkit-scrollbar-button{
+    /*Should be changes only as an example*/
+    background: #5f2100;
+}
+
+/*Filters select and input fileds*/
+.filters{
+    width: 10em;
+    display: inline-block !important;
+}
+
+.invalid-feedback{
+    display: inline-block !important;
 }

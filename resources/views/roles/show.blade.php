@@ -1,5 +1,7 @@
-<?php $title = ucfirst(str_replace('_', ' ', $role[0]->role)) . " role"; ?>
-@extends('layouts/main')
+@php
+ 	$title = ucfirst(str_replace('_', ' ', $role[0]->role)) . " role";
+@endphp
+@extends('layouts/user')
 @section('title')
     <h1 class="page_title">Role {{ ucfirst(str_replace('_', ' ', $role[0]->role)) }}</h1>
 @endsection

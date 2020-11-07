@@ -6,7 +6,7 @@
         <a class="nav-link" href="#">Authors</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Books</a>
+        <a class="nav-link" href="{{ route('books.index') }}">Books</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Genres</a>
@@ -22,12 +22,18 @@
     </li>
     <li class="nav-item">
         <!-- The list of all users in the app -->
-        <a class="nav-link" href="#">Users</a>
+        <a class="nav-link" href="{{ route('users.list') }}">Users</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">User speed</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Wishlists</a>
+        <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlists</a>
+    </li>
+    <li class="nav-item">
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <input class="nav-link" type="submit" name="submit" value="{{ __('Logout') }}">
+        </form>
     </li>
 </ul>
