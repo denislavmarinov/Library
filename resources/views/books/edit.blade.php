@@ -6,9 +6,6 @@
     <h1 class="page_title">Update book</h1>
 @endsection
 @section('content')
-@if (Session::has('message'))
-    <script type="text/javascript">alert('{{ Session::get('message' )}}');</script>
-@endif
 <br>
 {!! Form::open(['route' => ['books.update', $book->first()->id], 'method' => 'put']) !!}
 <!-- Title  -->

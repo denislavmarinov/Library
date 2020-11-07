@@ -111,4 +111,27 @@ class Book extends Model
                     ->where('id', '=', $id)
                     ->delete();
     }
+
+    public static function add_book_to_readlist ($data)
+    {
+        return DB::table('books_users')
+                    ->insert($data);
+    }
+    public static function get_all_books_with_authors_genres_that_user_read ($user_id)
+    {
+        return DB::table('books_users')
+                    ->join('books', 'books_users.book', '=', 'books.id')
+                    ->join('authors', 'books.author', '=', 'authors.id')
+                    ->join('genres', 'books.genre', '=', 'genres.id')
+                    ->select('books.id', 'books.title', 'books.short_content', 'books.isbn', 'books.pages', 'books.edition', 'genres.genre','books.genre as genre_id', 'books.author', 'authors.first_name', 'authors.last_name', 'up_to_page', 'started_to_read', 'ended_to_read', 'read',)
+                    ->where('books_users.user', '=', $user_id)
+                    ->get();
+    }
+
+    public static function delete_book_from_user_read_list ($user, $book)
+    {
+        return DB::table('books_users')
+                        ->where('book', '=', $book, 'AND', 'user', '=', $user)
+                        ->delete();
+    }
 }

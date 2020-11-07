@@ -6,9 +6,6 @@
     <h1 class="page_title">Book:  {{ ucfirst(str_replace('_', ' ', $book->title)) }}</h1>
 @endsection
 @section('content')
-@if (Session::has('message'))
-    <script type="text/javascript">alert('{{ Session::get('message' )}}');</script>
-@endif
 <br>
 	<h2 class="text-center">Title: {{ ucfirst($book->title) }}</h2>
 	<hr>
@@ -36,7 +33,10 @@
 					<a href="" class="btn btn-outline-teal">Add to wishlist</a>
 				</div>
 				<div class="col-3">
-					<a href="" class="btn btn-outline-cyan">Start reading</a>
+					<form method="post" action="{{ route('start_reading', $book->id) }}">
+						@csrf
+						<input type="submit" name="submit" value="Start reading" class="btn btn-outline-cyan">
+					</form>
 				</div>
 			</div>
 			<p> </p><p> </p><p> </p><p> </p><p> </p><p> </p>
