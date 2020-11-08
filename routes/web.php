@@ -44,3 +44,5 @@ Route::resource('wishlist', 'WishlistController');
 // Route for user authentication
 Auth::routes();
 
+//Route Genres Controller
+Route::resource('genres', 'GenresController');

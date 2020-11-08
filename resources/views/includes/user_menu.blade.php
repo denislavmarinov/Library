@@ -9,7 +9,7 @@
         <a class="nav-link" href="{{ route('books.index') }}">Books</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Genres</a>
+        <a class="nav-link" href="{{ route('genres.index') }}">Genres</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Nationalities</a>
