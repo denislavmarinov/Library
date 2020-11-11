@@ -46,3 +46,6 @@ Auth::routes();
 
 //Route Genres Controller
 Route::resource('genres', 'GenresController');
+
+//Route Nationalities Controller
+Route::resource('nationalities', 'NationalitiesController');

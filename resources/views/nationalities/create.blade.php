@@ -1,9 +1,9 @@
 @php
-    $title = "Add Genres";
+    $title = "Add Nationalities";
  @endphp
 @extends('layouts/user')
 @section('title')
-    <h1 class="page_title">Add genres</h1>
+    <h1 class="page_title">Add nationalities</h1>
 @endsection
 @section('content')
 
