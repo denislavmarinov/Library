@@ -12,7 +12,7 @@
         <a class="nav-link" href="{{ route('genres.index') }}">Genres</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Nationalities</a>
+        <a class="nav-link" href="{{ route('nationalities.index') }}">Nationalities</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Notifications</a>

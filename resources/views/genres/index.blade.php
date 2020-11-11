@@ -8,10 +8,10 @@
 @section('content')
 
 <br>
+<a href="{{ route('genres.create') }}" class="btn btn-outline-primary">Add genre</a>
 
-<a href="{{ route('genres.create') }}">Add genre</a>
 <table class="table">
-	<tr>
+	<tr class="badge-primary">
 		<th>#</th>
 		<th>Genres</th>
 		<th>Description</th>

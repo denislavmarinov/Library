@@ -28,4 +28,9 @@ class Author extends Model
     {
         return DB::select(DB::raw("SELECT `id`, CONCAT(`first_name`, ' ' , `last_name`) as `author_name` FROM `authors` WHERE `id` = :id"), ['id' => $id]);
     }
+
+    public static function select_author_with_count_of_books ($id)
+    {
+        return DB::select(DB::raw("SELECT COUNT(*) as 'book_count' FROM authors LEFT JOIN books ON books.author = authors.id WHERE authors.id = :id"), ['id' => $id]);
+    }
 }
