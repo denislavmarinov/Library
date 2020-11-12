@@ -39,13 +39,20 @@ Route::get('/book/{book}/read_book', 'BooksController@read_book')->name('read_bo
 Route::post('/book/{book}/delete_from_readlist', 'BooksController@delete_book_from_readlist')->name('delete_from_readlist');
 
 // Wishlist routes
-Route::resource('wishlist', 'WishlistController');
+Route::resource('/wishlist', 'WishlistController');
 
 // Route for user authentication
 Auth::routes();
 
 //Route Genres Controller
+<<<<<<< Updated upstream
 Route::resource('genres', 'GenresController');
 
 //Route Nationalities Controller
 Route::resource('nationalities', 'NationalitiesController');
+=======
+Route::resource('/genres', 'GenresController');
+
+// Notifications routes
+Route::resource('/notifications', 'NotificationsController');
+>>>>>>> Stashed changes

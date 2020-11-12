@@ -14,7 +14,7 @@ class NotificationUsersSeeder extends Seeder
     {
         return [
                'notification_id' => Notification::all()->random()->id,
-               'user_id' => User::all()->random()->id,
+               'user_id' => rand(51, 53),
                'seen' => $faker->boolean(50)
         ];
     }
