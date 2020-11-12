@@ -25,8 +25,8 @@ class Genre extends Model
     public static function get_genre_with_authors_end_books( $id)
     {
         return DB::table('books')
-                    ->join('authors', 'books.author', '=', 'authors.id')
-                    ->join('genres', 'books.genre', '=', 'genres.id')
+                    ->leftJoin('authors', 'books.author', '=', 'authors.id')
+                    ->leftJoin('genres', 'books.genre', '=', 'genres.id')
                     ->select('books.id as book_id', 'books.title', 'books.short_content', 'books.isbn', 'books.pages', 'books.edition', 'genres.genre','books.genre as genre_id', 'books.author', 'authors.first_name', 'authors.last_name', 'genres.description')
                     ->where('books.genre', '=', $id)
                     ->get();
