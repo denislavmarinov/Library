@@ -64,7 +64,7 @@ class LoginController extends Controller
 
         if ($check_if_email_exist->count() <= 0)
         {
-            return redirect()->route('login')->with('message', "Email does not exist in our records!");
+            return redirect()->route('login')->with(['message' =>"Email does not exist in our records!", 'type' =>'danger']);
         }
 
         // Check if the user is logged in another device
@@ -72,7 +72,7 @@ class LoginController extends Controller
 
         if ($check_if_user_is_logged_in[0]->logged)
         {
-            return redirect()->route('login')->with('message', "Firstly logout from the other device then try again!");
+            return redirect()->route('login')->with(['message' => "Firstly logout from the other device then try again!", 'type' => 'danger']);
         }
         // Make the login
          $response = $this->default_login($request);
@@ -95,6 +95,6 @@ class LoginController extends Controller
     {
         User::logged_field_to_false(Auth::id());
         $this->default_logout($request);
-        return redirect()->route('homepage')->with('message', 'Successfully logouted!');
+        return redirect()->route('homepage')->with(['message' => 'Successfully logouted!', 'type' =>'success']);
     }
 }

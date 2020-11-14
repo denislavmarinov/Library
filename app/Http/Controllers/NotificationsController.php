@@ -22,9 +22,45 @@ class NotificationsController extends Controller
     {
         // All notifications that user has not seen yet
         $notifications = Notification::get_all_unreaded_notifiactions_for_user(Auth::id());
-        dd($notifications);
+
+        return view('user_dashboard.user_dashboard', compact('notifications'));
     }
 
+    public function notification_seen ($notification_id)
+    {
+        $data_to_update = [
+            'seen' => 1,
+        ];
+
+       $result = Notification::notification_mark_as_seen($data_to_update, $notification_id, Auth::id());
+
+       if ($result > 0)
+       {
+        echo true;
+       }
+       else
+       {
+        echo false;
+       }
+    }
+
+    public function mark_all_notifications_as_seen ()
+    {
+        $data_to_update = [
+            'seen' => 1,
+        ];
+
+       $result = Notification::mark_all_notifications_as_seen($data_to_update,  Auth::id());
+
+       if ($result > 0)
+       {
+        echo true;
+       }
+       else
+       {
+        echo false;
+       }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +68,7 @@ class NotificationsController extends Controller
      */
     public function create()
     {
-        //
+        return  view('notifications.');
     }
 
     /**

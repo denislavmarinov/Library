@@ -1,7 +1,7 @@
 @php
     $title = "Show genre";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">Show genre</h1>
 @endsection

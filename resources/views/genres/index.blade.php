@@ -1,7 +1,7 @@
 @php
     $title = "Genres";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">All genres</h1>
 @endsection
@@ -16,11 +16,11 @@
 		<th>Genres</th>
 		<th>Description</th>
 		<th>Edit</th>
-	</tr>	
+	</tr>
 	<tbody class="">
 @php
     $num = 1;
-@endphp		
+@endphp
 @foreach( $genres as $genre )
 	<tr>
 		<td>{{ $num++ }}</td>
@@ -28,7 +28,7 @@
 		<td>{{ $genre->description }}</td>
 		<td><a href="{{ route('genres.edit', $genre->id) }}">Edit</a></td>
 	</tr>
-@endforeach	
+@endforeach
 
 	</tbody>
 </table>

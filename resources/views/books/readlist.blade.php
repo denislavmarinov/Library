@@ -1,7 +1,7 @@
 @php
     $title = "Readlist";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">Readlist</h1>
 @endsection

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Genre;
 use App\Author;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class BooksController extends Controller
 {
@@ -97,11 +97,11 @@ class BooksController extends Controller
 
         if ($result)
         {
-            return redirect()->route('books.index')->with('message', 'Book successfully added!');
+            return redirect()->route('books.index')->with(['message'=> 'Book successfully added!', 'type' =>'success']);
         }
         else
         {
-            return redirect()->route('books.index')->with('message', 'Something went wrong try again later!!');
+            return redirect()->route('books.index')->with(['message' => 'Something went wrong try again later!!', 'type' =>'danger']);
         }
     }
 
@@ -164,11 +164,11 @@ class BooksController extends Controller
 
         if ($result)
         {
-            return redirect()->route('books.show', $book->id)->with('message', 'Book was successfully updated');
+            return redirect()->route('books.show', $book->id)->with(['message' => 'Book was successfully updated', 'type' =>'success']);
         }
         else
         {
-            return redirect()->route('books.show', $book->id)->with('message', 'Something went wrong! Try again later!');
+            return redirect()->route('books.show', $book->id)->with(['message' => 'Something went wrong! Try again later!', 'type' =>'danger']);
         }
 
 
@@ -186,11 +186,11 @@ class BooksController extends Controller
 
         if ($result)
         {
-            return redirect()->route('books.index')->with('message', 'Book was successfully deleted!');
+            return redirect()->route('books.index')->with(['message' => 'Book was successfully deleted!', 'type' =>'success']);
         }
         else
         {
-            return redirect()->route('books.index')->with('message', 'Something went wrong! Try again later!');
+            return redirect()->route('books.index')->with(['message' => 'Something went wrong! Try again later!', 'type' =>'danger']);
         }
     }
 
@@ -209,11 +209,11 @@ class BooksController extends Controller
 
         if ($result)
         {
-            return redirect()->route('read_book', $book->id)->with('message', 'Successfully added book to readlist!');
+            return redirect()->route('read_book', $book->id)->with(['message' => 'Successfully added book to readlist!', 'type' =>'success']);
         }
         else
         {
-            return redirect()->route('books.show', $book->id)->with('message', 'Something went wrong! Please try again later!');
+            return redirect()->route('books.show', $book->id)->with(['message' => 'Something went wrong! Please try again later!', 'type' =>'danger']);
         }
 
     }
@@ -244,11 +244,11 @@ class BooksController extends Controller
 
         if ($result)
         {
-            return redirect()->route('readlist')->with('message', "Successfully deleted from readlist!");
+            return redirect()->route('readlist')->with(['message'=> "Successfully deleted from readlist!", 'type' =>'success']);
         }
         else
         {
-            return redirect()->route('readlist')->with('message', "Something went wrong!");
+            return redirect()->route('readlist')->with(['message'=> "Something went wrong!", 'type' =>'danger']);
         }
     }
 }
