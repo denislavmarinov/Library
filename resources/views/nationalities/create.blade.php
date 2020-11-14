@@ -1,7 +1,7 @@
 @php
     $title = "Add Nationalities";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">Add nationalities</h1>
 @endsection

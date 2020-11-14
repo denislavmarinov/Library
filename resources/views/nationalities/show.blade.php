@@ -1,16 +1,20 @@
 @php
     $title = "Show nationalities";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">Show nationalities</h1>
 @endsection
 @section('content')
-<h2>{{ $nationality[0]->nationality }}</h2>
-<p>{{ $nationality[0]->history_link }}</p>
-<p>{{ $nationality[0]->flag }}</p>
+<h2>Country:
+    <a href="{{ $nationality[0]->history_link }}">
+        <img width="12.5" src="{{ $nationality[0]->flag }}">
+    </a>
+        {{ $nationality[0]->nationality }}
+</h2>
 
 <hr>
+<h2 class="text-center">Authors with this nationality</h2>
 <table class="table">
     <tr>
         <td>#</td>
@@ -27,7 +31,7 @@
         </tr>
     @endif
 
-    @for( $i=0; $i < count($nationality); $i++) 
+    @for( $i=0; $i < count($nationality); $i++)
         <tr>
             <td>{{ $num++ }}</td>
             <td><a href="route('author.show', $book->author)"> {{ $nationality[$i]->first_name  }} {{$nationality[$i]->last_name}}</a></td>

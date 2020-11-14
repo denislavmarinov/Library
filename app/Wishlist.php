@@ -25,10 +25,10 @@ class Wishlist extends Model
     public static function get_all_for_user ($user_id)
     {
     	return DB::table('wishlists')
-    				->join('books', 'wishlists.book_id', '=', 'books.id')
-    				->join('authors', 'books.author', '=', 'authors.id')
-    				->select('books.id', 'authors.id as author', 'books.title', 'authors.first_name', 'authors.last_name')
-    				->where('wishlists.user_id', '=', $user_id)
-    				->get();
+				->join('books', 'wishlists.book_id', '=', 'books.id')
+				->join('authors', 'books.author', '=', 'authors.id')
+				->select('books.id', 'authors.id as author', 'books.title', 'authors.first_name', 'authors.last_name')
+				->where('wishlists.user_id', '=', $user_id)
+				->get();
     }
 }

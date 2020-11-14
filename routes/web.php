@@ -14,45 +14,46 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Homepage route
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 })->name('homepage');
-
-
-// Roles routes
-Route::get('/roles', 'RolesController@index')->name('roles.index'); // Page where all roles are listed
-Route::get('/roles/{role}', 'RolesController@show')->name('roles.show'); // Page where the users. which has selected role are listed
-
-// Users routes
-Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role
-Route::get('/users', 'UsersController@index')->name('users.list');  // The list of all users in the app (visible only for admins)
-Route::put('/users/require_change_password', 'UsersController@require_change_password')->name('require_change_password');// Wrong route!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Route::get('/user_dashboard', function(){
-	return view('user_dashboard.user_dashboard');
-})->name('user_dashboard');
-
-// Books routes
-Route::resource('books', 'BooksController');
-Route::post('/book/{book}/start_reading', 'BooksController@start_reading')->name('start_reading');
-Route::get('/book/readlist', 'BooksController@readlist')->name('readlist');
-Route::get('/book/{book}/read_book', 'BooksController@read_book')->name('read_book');
-Route::post('/book/{book}/delete_from_readlist', 'BooksController@delete_book_from_readlist')->name('delete_from_readlist');
-
-// Wishlist routes
-Route::resource('/wishlist', 'WishlistController');
 
 // Route for user authentication
 Auth::routes();
 
-//Route Genres Controller
-<<<<<<< Updated upstream
-Route::resource('genres', 'GenresController');
+Route::get('/users/password_update', 'UsersController@password_update')->name('password_update')->middleware('auth');
+Route::put('/users/password_update/store', 'UsersController@store_new_password')->name('password_update_store')->middleware('auth');
 
-//Route Nationalities Controller
-Route::resource('nationalities', 'NationalitiesController');
-=======
-Route::resource('/genres', 'GenresController');
+Route::middleware(['auth', 'required_password_change'])->group(function() {
+	// Roles routes
+	Route::get('/roles', 'RolesController@index')->name('roles.index'); // Page where all roles are listed
+	Route::get('/roles/{role}', 'RolesController@show')->name('roles.show'); // Page where the users. which has selected role are listed
 
-// Notifications routes
-Route::resource('/notifications', 'NotificationsController');
->>>>>>> Stashed changes
+	// Users routes
+	Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role
+	Route::get('/users', 'UsersController@index')->name('users.list');  // The list of all users in the app (visible only for admins)
+	Route::put('/users/require_change_password/', 'UsersController@require_change_password')->name('require_change_password');
+
+	// Books routes
+	Route::resource('books', 'BooksController');
+	Route::post('/book/{book}/start_reading', 'BooksController@start_reading')->name('start_reading');
+	Route::get('/book/readlist', 'BooksController@readlist')->name('readlist');
+	Route::get('/book/{book}/read_book', 'BooksController@read_book')->name('read_book');
+	Route::post('/book/{book}/delete_from_readlist', 'BooksController@delete_book_from_readlist')->name('delete_from_readlist');
+
+	// Wishlist routes
+	Route::resource('/wishlist', 'WishlistController');
+
+	//Route Genres Controller
+	Route::resource('/genres', 'GenresController');
+
+	//Route Nationalities Controller
+	Route::resource('/nationalities', 'NationalitiesController');
+
+	// Notifications routes
+	Route::resource('/notifications', 'NotificationsController');
+	Route::get('/user_dashboard', 'NotificationsController@index')->name('user_dashboard');
+	Route::get('/notification_seen/{id}', 'NotificationsController@notification_seen')->name('notification_seen');
+	Route::get('/mark_all_notifications_as_seen', 'NotificationsController@mark_all_notifications_as_seen')->name('mark_all_notifications_as_seen');
+
+});

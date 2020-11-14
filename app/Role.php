@@ -17,9 +17,9 @@ class Role extends Model
     public static function show_roles_with_users (Role $role)
     {
         return DB::table('roles')
-                    ->join('users', 'roles.id', '=', 'users.role_id')
-                    ->select('roles.*', 'users.*')
-                    ->where('users.role_id', '=', $role->id)
-                    ->get();
+                ->join('users', 'roles.id', '=', 'users.role_id')
+                ->select('roles.*', 'users.*')
+                ->where('users.role_id', '=', $role->id)
+                ->get();
     }
 }

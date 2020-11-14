@@ -1,7 +1,7 @@
 @php
     $title = "Roles";
  @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
     <h1 class="page_title">Roles</h1>
 @endsection

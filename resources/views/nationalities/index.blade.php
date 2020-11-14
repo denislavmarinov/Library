@@ -1,7 +1,7 @@
 @php
 	$title = 'Nationalities';
 @endphp
-@extends('layouts/user')
+@extends('layouts.main')
 @section('title')
 	<h1 class="page_title">All Nationalities</h1>
 @endsection
@@ -20,7 +20,7 @@
 	<tbody>
 @php
     $num = 1;
-@endphp		
+@endphp
 @foreach( $nationalities as $nationality )
 	<tr>
 		<td>{{ $num++ }}</td>
@@ -28,7 +28,7 @@
 		<td><a href="{{ $nationality->history_link }}">Link</a></td>
 		<td><a href="{{ route('nationalities.show', $nationality->id) }}">{{ $nationality->nationality }}</a></td>
 	</tr>
-@endforeach			
+@endforeach
 	</tbody>
 </table>
 
