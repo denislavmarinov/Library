@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <br>
-{!! Form::open(['route' => 'books.store']) !!}
+{!! Form::open(['route' => 'books.store', 'enctype' => 'multipart/form-data']) !!}
 <!-- Title  -->
 @if ($errors->has('title'))
     <span class="invalid-feedback" role="alert">

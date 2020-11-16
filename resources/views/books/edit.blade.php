@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <br>
-{!! Form::open(['route' => ['books.update', $book->first()->id], 'method' => 'put']) !!}
+{!! Form::open(['route' => ['books.update', $book->first()->id], 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
 <!-- Title  -->
 @if ($errors->has('title'))
     <span class="invalid-feedback" role="alert">
@@ -70,6 +70,15 @@
 @endif
 {!! Form::label('genre', 'The book genre: ', ['class' => 'form-control-label']) !!}
 {!! Form::select('genre', $genres, $book->first()->genre,  ['class' => 'custom-select', 'placeholder' => 'Choose genre']) !!}
+<br><br>
+<!-- File -->
+@if ($errors->has('book_file'))
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->get('book_file')[0] }}</strong>
+    </span>
+@endif
+{!! Form::label('book_file', 'The book: ', ['class' => 'form-control-label']) !!}
+{!! Form::file('book_file', ['class' => 'form-control-file']) !!}
 <br>
 {!! Form::submit('Update book', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}

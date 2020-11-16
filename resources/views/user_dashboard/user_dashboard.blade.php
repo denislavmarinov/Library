@@ -24,9 +24,13 @@
 	<div class="col-5">
 		<h4 class="text-center">Profile image</h4>
 		<hr>
-		<img width="250" src="#">
+		@if (Auth::user()->image)
+		<img style="border: 35px solid #ccc;" width="300" src="{{ asset('storage/' . Auth::user()->image)}}">
 		<p></p>
-		<a href="">Change profile image</a>
+		<a href="{{ route('change_user_image') }}">Change profile image</a>
+		@else
+			<a href="{{ route('change_user_image') }}">Add profile image</a>
+		@endif
 	</div>
 	<div class="col-6">
 		<p>Name: <span class="font-weight-bold">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></p>

@@ -21,7 +21,7 @@
         {!! Form::text('filter', (isset($_GET['filter'])) ? $_GET['filter'] : null, ['placeholder' => 'Book name', 'class' => 'form-control filters']) !!}
     </div>
     <div class="col-2">
-        {!! Form::submit('Search', ['class' => 'btn btn-outline-warning']) !!}
+        {!! Form::submit('Search', ['class' => 'btn btn-outline-orange']) !!}
         <a class="btn btn-outline-danger" href="{{ route('books.index') }}">Clear</a>
     </div>
 </div>
