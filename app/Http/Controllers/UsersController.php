@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -94,5 +95,37 @@ class UsersController extends Controller
             'message' => 'Successfully updated password!',
             'type' => 'success'
         ]);
+    }
+
+    public function change_user_image ()
+    {
+        return view('user_dashboard.change_user_image');
+    }
+
+    public function change_user_image_action (Request $request)
+    {
+        $extension = $request->file('image')->getClientOriginalExtension();
+
+        if ($extension != 'png' && $extension != 'jpg' && $extension != 'jpeg')
+        {
+            return redirect()->back()->with([
+                'message' => 'File extension is not allowed!!!',
+                'type' => 'danger'
+            ]);
+        }
+
+        Storage::delete( 'public/' . Auth::user()->image );
+
+        $filename = str_replace(' ', '_', Auth::user()->first_name) . str_replace(' ', '_', Auth::user()->last_name) . rand();
+
+        $image_path = $request->file('image')->storeAs('public/user_images', $filename .'.' . $extension);
+
+        $data_to_update = [
+            'image' => 'user_images/' . $filename .'.' . $extension
+        ];
+
+        $result = User::change_user_profile_image($data_to_update, Auth::id());
+
+        return redirect()->route('user_dashboard')->with(['message' => 'Successfully updated profile image!', 'type' =>'success']);
     }
 }

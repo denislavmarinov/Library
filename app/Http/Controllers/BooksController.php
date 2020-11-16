@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
@@ -79,6 +80,12 @@ class BooksController extends Controller
      */
     public function store(BookRequest $request)
     {
+        $extension = $request->file('book_file')->getClientOriginalExtension();
+
+        $filename = str_replace(' ', '_', $request->title) . '-' . rand();
+
+        $file_path = $request->file('book_file')->storeAs('public/books', $filename .'.' . $extension);
+
         $book = [
             'title' => $request->title,
             'isbn' => $request->isbn,
@@ -87,11 +94,9 @@ class BooksController extends Controller
             'author' => $request->author,
             'edition' => $request->edition,
             'genre' => $request->genre,
-            'file_path' => ' ',
+            'file_path' => 'books/' . $filename .'.' . $extension,
             'added_by' => Auth::user()->id
         ];
-
-        dd($book);
 
         $result = Book::add_new_book($book);
 
@@ -150,17 +155,26 @@ class BooksController extends Controller
      */
     public function update(BookRequest $request, Book $book)
     {
-        $new_book = [
+        $extension = $request->file('book_file')->getClientOriginalExtension();
+
+        $filename = str_replace(' ', '_', $request->title) . '-' . rand();
+
+        $file_path = $request->file('book_file')->storeAs('public/books', $filename .'.' . $extension);
+
+        Storage::delete('public/' . $book->file_path);
+
+        $updated_book = [
             'title' => $request->title,
             'isbn' => $request->isbn,
             'pages' => $request->pages,
             'short_content' => $request->short_content,
+            'file_path' => 'books/' . $filename .'.' . $extension,
             'author' => $request->author,
             'edition' => $request->edition,
             'genre' => $request->genre
         ];
 
-        $result = Book::update_book($book->id, $new_book);
+        $result = Book::update_book($book->id, $updated_book);
 
         if ($result)
         {
@@ -182,6 +196,7 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
+        Storage::delete('public/' . $book->file_path);
         $result = Book::delete_book($book->id);
 
         if ($result)

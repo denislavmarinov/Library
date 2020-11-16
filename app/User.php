@@ -135,4 +135,11 @@ class User extends Authenticatable
                 ->where('user_id', '=', $id)
                 ->delete();
     }
+
+    public static function change_user_profile_image ($data, $id)
+    {
+        return DB::table('users')
+                ->where('id', '=', $id)
+                ->update($data);
+    }
 }

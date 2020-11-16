@@ -33,6 +33,8 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 	Route::put('/roles/change_user_role', 'UsersController@change_user_role')->name('change_user_role'); // Method, which change user role
 	Route::get('/users', 'UsersController@index')->name('users.list');  // The list of all users in the app (visible only for admins)
 	Route::put('/users/require_change_password/', 'UsersController@require_change_password')->name('require_change_password');
+	Route::get('users/change_user_image/', 'UsersController@change_user_image')->name('change_user_image');
+	Route::patch('users/change_user_image/', 'UsersController@change_user_image_action')->name('change_user_image_action');
 
 	// Books routes
 	Route::resource('books', 'BooksController');

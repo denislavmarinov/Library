@@ -28,6 +28,7 @@ class BookRequest extends FormRequest
             'isbn' => 'required|min:10|max:30',
             'pages' => 'required|max:11',
             'short_content' => 'required|min:150',
+            'book_file' => 'required|mimes:pdf',
             'author' => 'required',
             'edition' => 'required|max:11',
             'genre' => 'required',
