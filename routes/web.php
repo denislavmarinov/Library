@@ -52,6 +52,9 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 	//Route Nationalities Controller
 	Route::resource('/nationalities', 'NationalitiesController');
 
+	//Route Authors Controller
+	Route::resource('/authors', 'AuthorsController');
+	
 	// Notifications routes
 	Route::resource('/notifications', 'NotificationsController');
 	Route::get('/user_dashboard', 'NotificationsController@index')->name('user_dashboard');

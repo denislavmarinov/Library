@@ -4,7 +4,7 @@
 @extends('layouts.main')
 @section('title')
     <h1 class="page_title">Welcome to our Library</h1>
-@endsection
+    @endsection
 @section('content')
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
