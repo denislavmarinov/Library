@@ -7,15 +7,16 @@
 @endsection
 @section('content')
 
-<br>
-<a href="{{ route('nationalities.create') }}" class="btn btn-outline-primary">Add nationality</a>
+
 <table class="table">
-	<tr class="badge-primary">
+	<tr class="badge-success">
 		<th>#</th>
 		<th>Nationality</th>
 		<th>History link</th>
 		<th>Flag</th>
-		<th>Update</th>
+		@if(Auth::user()->role_id == 2)	
+			<th>Edit</th>
+		@endif	
 	</tr>
 	<tbody>
 @php
@@ -27,6 +28,9 @@
 		<td><a href="{{ route('nationalities.show', $nationality->id) }}">{{ $nationality->nationality }}</a></td>
 		<td><a href="{{ $nationality->history_link }}">Link</a></td>
 		<td><a href="{{ route('nationalities.show', $nationality->id) }}">{{ $nationality->nationality }}</a></td>
+		@if(Auth::user()->role_id == 2)	
+			<td><a href="{{ route('nationalities.edit', $nationality->id) }}">Edit</a></td>
+		@endif
 	</tr>
 @endforeach
 	</tbody>

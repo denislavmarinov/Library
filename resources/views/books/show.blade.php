@@ -21,8 +21,8 @@
 	<hr>
 	<div class="row">
 		<div class="col-6">
-			<p>Author: <a href="route('authors.show', $book->author)">{{ $book->first_name}} {{ $book->last_name }}</a></p>
-			<p>Genre: <a href="route('genre.show', $book->genre_id)">{{ $book->genre}}</a></p>
+			<p>Author: <a href="{{ route('authors.show', $book->author) }}">{{ $book->first_name}} {{ $book->last_name }}</a></p>
+			<p>Genre: <a href="{{ route('genres.show', $book->genre_id) }}">{{ $book->genre}}</a></p>
 			<p>ISBN: {{ $book->isbn }} </p>
 			<p>Pages: {{ $book->pages }}</p>
 			<p>Edition: {{ $book->edition }}</p>

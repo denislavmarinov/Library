@@ -10,20 +10,21 @@
     @endif
     @if (Auth::user()->role_id == '1')
     <li class="nav-item">
-        <a class="nav-link" href="#">Authors</a>
+        <a class="nav-link" href="{{ route('authors.index') }}">Authors</a>
     </li>
     @elseif( Auth::user()->role_id == '2')
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authors</a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">All authors</a>
+            <a class="dropdown-item" href="{{ route('authors.index') }}">All authors</a>
+            <a class="dropdown-item" href="{{ route('authors.create') }}">Add author</a>
             <a class="dropdown-item" href="#">Accept / Decline author</a>
             <a class="dropdown-item" href="#">Prevent author from uploading new book</a>
         </div>
     </li>
     @else
     <li class="nav-item">
-        <a class="nav-link" href="#">Authors</a>
+        <a class="nav-link" href="{{ route('authors.index') }}">Authors</a>
     </li>
     @endif
 

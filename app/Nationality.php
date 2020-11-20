@@ -14,10 +14,10 @@ class Nationality extends Model
         return $this->hasOne('App\Author');
     }
 
-    public static function get_all_nationalities ()
+    public static function get_all_nationalities()
     {
     	return DB::table('nationalities')
-				->select('id', 'nationalities')
+				->select('id', 'nationality')
 				->get();
     }
 

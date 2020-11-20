@@ -26,6 +26,6 @@
 {!! Form::label('description', 'Description: ', ['class' => 'form-control-label']) !!}
 {!! Form::textarea('description', old('description'), ['placeholder' => 'description', 'class' => 'form-control']) !!}
 <br>
-{!! Form::submit('Add genre', ['class' => 'btn btn-outline-primary']) !!}
+{!! Form::submit('Add genre', ['class' => 'btn btn-outline-success']) !!}
 {!! Form::close() !!}
 @endsection

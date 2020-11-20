@@ -39,10 +39,17 @@ class NationalitiesController extends Controller
      */
     public function store(Request $request)
     {
+        $flag_extension = $request->file('flag')->getClientOriginalExtension();
+
+        $flag_name = str_replace(' ', '_', $request->nationality);
+
+        $flag_path = $request->file('flag')->storeAs('public/flags', $flag_name .'.' . $flag_extension);
+
+
         $nationality = ['nationality' => $request->nationality,
-                'history_link' => $request->history_link,
-                'flag' => $request->flag
-                ];
+                                'history_link' => $request->history_link,
+                                'flag' => 'flags/'. $flag_name .'.' . $flag_extension
+                                ];
         DB::table('nationalities')->insert($nationality);
 
         return redirect()->route('nationalities.index');
@@ -79,7 +86,9 @@ class NationalitiesController extends Controller
      */
     public function edit(Nationality $nationality)
     {
-        //
+         $nationality = Nationality::find($nationality)->first();
+
+        return view('nationalities.edit', compact('nationality'));
     }
 
     /**
@@ -91,9 +100,16 @@ class NationalitiesController extends Controller
      */
     public function update(Request $request, Nationality $nationality)
     {
+        $flag_extension = $request->file('flag')->getClientOriginalExtension();
+
+        $flag_name = str_replace(' ', '_', $request->nationality);
+
+        $flag_path = $request->file('flag')->storeAs('public/flags', $flag_name .'.' . $flag_extension);
+
+
         $updated_nationality = ['nationality' => $request->nationality,
                                 'history_link' => $request->history_link,
-                                'flag' => $request->flag
+                                'flag' => 'flags/'. $flag_name .'.' . $flag_extension
                                 ];
         DB::table('nationalities')->where('id', '=', $nationality->id)->update($updated_nationality);
 

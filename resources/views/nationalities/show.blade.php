@@ -8,7 +8,7 @@
 @section('content')
 <h2>Country:
     <a href="{{ $nationality[0]->history_link }}">
-        <img width="12.5" src="{{ $nationality[0]->flag }}">
+        <img width="70" src="{{ asset('storage/' . $nationality[0]->flag)}}">
     </a>
         {{ $nationality[0]->nationality }}
 </h2>
@@ -16,7 +16,7 @@
 <hr>
 <h2 class="text-center">Authors with this nationality</h2>
 <table class="table">
-    <tr>
+    <tr class="badge-success">
         <td>#</td>
         <td>Authors</td>
         <td>Nationality</td>

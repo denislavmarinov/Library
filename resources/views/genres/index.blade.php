@@ -7,17 +7,16 @@
 @endsection
 @section('content')
 
-<br>
-<a href="{{ route('genres.create') }}" class="btn btn-outline-primary">Add genre</a>
-
 <table class="table">
-	<tr class="badge-primary">
+	<tr class="badge-success">
 		<th>#</th>
 		<th>Genres</th>
 		<th>Description</th>
-		<th>Edit</th>
+		@if(Auth::user()->role_id == 2)
+			<th>Edit</th>
+		@endif	
 	</tr>
-	<tbody class="">
+	<tbody>
 @php
     $num = 1;
 @endphp
@@ -26,7 +25,9 @@
 		<td>{{ $num++ }}</td>
 		<td><a href="{{ route('genres.show', $genre->id) }}">{{ $genre->genre }}</a></td>
 		<td>{{ $genre->description }}</td>
-		<td><a href="{{ route('genres.edit', $genre->id) }}">Edit</a></td>
+		@if(Auth::user()->role_id == 2)
+			<td><a href="{{ route('genres.edit', $genre->id) }}">Edit</a></td>
+		@endif	
 	</tr>
 @endforeach
 

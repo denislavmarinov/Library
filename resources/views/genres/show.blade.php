@@ -36,7 +36,7 @@
             <td type="button" data-toggle="tooltip" data-placement="top" title="To see more click on the book title"> {{ str_split($book->short_content, 20)[0] }} ...</td>
             <td> {{ $book->isbn }} </td>
             <td> {{ $book-> pages}} </td>
-            <td><a href="route('author.show', $book->author)"> {{ $book->first_name  }} {{$book->last_name}}</a> </td>
+            <td><a href="{{ route('authors.show', $book->author) }}"> {{ $book->first_name  }} {{$book->last_name}}</a> </td>
             <td> <a href="" class="btn btn-outline-teal">Add to wishlist</a> </td>
             <td>
                 <form method="post" action="{{ route('start_reading', $book->book_id) }}">
