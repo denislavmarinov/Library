@@ -17,7 +17,8 @@ class Nationality extends Model
     public static function get_all_nationalities()
     {
     	return DB::table('nationalities')
-				->select('id', 'nationality')
+				->select('id', 'nationality', 'flag', 'history_link')
+                ->orderBy('nationality', 'asc')
 				->get();
     }
 
@@ -28,5 +29,12 @@ class Nationality extends Model
                 ->select('nationalities.id as nationality_id', 'nationalities.nationality', 'nationalities.history_link', 'nationalities.flag','authors.first_name', 'authors.last_name', 'authors.id as author_id')
                 ->where('nationalities.id', '=', $id)
                 ->get();
+    }
+
+    public static function delete_nationality ($nationality_id)
+    {
+        return DB::table('nationalities')
+                ->where('id', '=', $nationality_id)
+                ->delete();
     }
 }

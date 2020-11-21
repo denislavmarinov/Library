@@ -22,7 +22,7 @@
         <strong>{{ $errors->get('history_link')[0] }}</strong>
     </span>
 @endif
-{!! Form::label('history_link', 'Historylink: ', ['class' => 'form-control-label']) !!}
+{!! Form::label('history_link', 'History link: ', ['class' => 'form-control-label']) !!}
 {!! Form::text('history_link', $nationality->history_link, ['placeholder' => 'History link', 'class' => 'form-control']) !!}
 <br>
 @if ($errors->has('flag'))

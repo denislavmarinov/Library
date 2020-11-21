@@ -6,6 +6,8 @@ use App\Author;
 use App\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\NationalitiesRequest;
 
 class NationalitiesController extends Controller
 {
@@ -16,7 +18,7 @@ class NationalitiesController extends Controller
      */
     public function index()
     {
-        $nationalities = Nationality::all();
+        $nationalities = Nationality::get_all_nationalities();
 
         return view('nationalities.index', compact('nationalities'));
     }
@@ -37,7 +39,7 @@ class NationalitiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NationalitiesRequest $request)
     {
         $flag_extension = $request->file('flag')->getClientOriginalExtension();
 
@@ -46,10 +48,11 @@ class NationalitiesController extends Controller
         $flag_path = $request->file('flag')->storeAs('public/flags', $flag_name .'.' . $flag_extension);
 
 
-        $nationality = ['nationality' => $request->nationality,
-                                'history_link' => $request->history_link,
-                                'flag' => 'flags/'. $flag_name .'.' . $flag_extension
-                                ];
+        $nationality = [
+            'nationality' => $request->nationality,
+            'history_link' => $request->history_link,
+            'flag' => 'flags/'. $flag_name .'.' . $flag_extension
+        ];
         DB::table('nationalities')->insert($nationality);
 
         return redirect()->route('nationalities.index');
@@ -65,15 +68,7 @@ class NationalitiesController extends Controller
     {
         $nationality = Nationality::get_nationality_with_history_link_and_flag($nationality->id);
 
-        $authors_books = [];
-        foreach ($nationality as $author)
-        {
-            $book_count = Author::select_author_with_count_of_books($author->author_id);
-            array_push($authors_books, [
-                'author' => $author->author_id,
-                'count_of_books' => $book_count[0]->book_count
-            ]);
-        }
+        $authors_books = Author::select_authors_with_nationality_and_count_of_books($nationality[0]->nationality_id);
 
         return view('nationalities.show', compact('nationality', 'authors_books'));
     }
@@ -98,7 +93,7 @@ class NationalitiesController extends Controller
      * @param  \App\Nationality  $nationality
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nationality $nationality)
+    public function update(NationalitiesRequest $request, Nationality $nationality)
     {
         $flag_extension = $request->file('flag')->getClientOriginalExtension();
 
@@ -124,6 +119,10 @@ class NationalitiesController extends Controller
      */
     public function destroy(Nationality $nationality)
     {
-        //
+        Storage::delete( 'public/' . $nationality->flag );
+
+        Nationality::delete_nationality($nationality->id);
+
+        return redirect()->route('nationalities.index');
     }
 }
