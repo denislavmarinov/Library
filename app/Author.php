@@ -33,7 +33,7 @@ class Author extends Model
     public static function insert_author($data)
     {
         return DB::table('authors')->insert($data);
-    } 
+    }
 
     public static function update_author($data, $id)
     {
@@ -45,5 +45,10 @@ class Author extends Model
     public static function select_author_with_count_of_books($id)
     {
         return DB::select(DB::raw("SELECT COUNT(*) as 'book_count' FROM authors LEFT JOIN books ON books.author = authors.id WHERE authors.id = :id"), ['id' => $id]);
+    }
+
+    public static function select_authors_with_nationality_and_count_of_books($nationality)
+    {
+        return DB::select(DB::raw("SELECT COUNT(*) as 'book_count', authors.`id` as 'author', authors.first_name, authors.last_name FROM authors LEFT JOIN books ON books.author = authors.id JOIN nationalities on authors.nationality = nationalities.id WHERE authors.nationality = :nationality GROUP BY authors.id, authors.first_name, authors.last_name  ORDER BY book_count DESC, first_name ASC, last_name ASC"), ['nationality' => $nationality]);
     }
 }
