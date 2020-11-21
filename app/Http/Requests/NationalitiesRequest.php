@@ -26,7 +26,7 @@ class NationalitiesRequest extends FormRequest
         return [
             'nationality' => 'required|min:3|max:60',
             'history_link' => 'required',
-            'flag' => 'required|mimes:png/jpg/jpeg'
+            'flag' => 'required|mimes:png,jpg,jpeg'
         ];
     }
 }

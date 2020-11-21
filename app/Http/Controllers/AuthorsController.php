@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Author;
 use App\Book;
-use App\Nationality;
+use App\Author;
 use Carbon\Carbon;
+use App\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorsController extends Controller
 {
@@ -19,6 +20,11 @@ class AuthorsController extends Controller
     public function index()
     {
         $authors = Author::get_all_authors();
+
+        foreach ($authors as $author)
+        {
+            $author->date_of_birth = Carbon::parse($author->date_of_birth)->format('d m Y');
+        }
 
         return view('authors.index', compact('authors'));
     }
@@ -45,7 +51,6 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-
         $extension = $request->file('image')->getClientOriginalExtension();
 
         $filename = str_replace(' ', '', $request->first_name) . '_' . str_replace(' ', '', $request->last_name) . '-' . rand();
@@ -54,13 +59,13 @@ class AuthorsController extends Controller
         $image = $request->file('image')->storeAs('public/authors', $filename .'.' . $extension);
 
         $author = [
-            'first_name' => $request->first_name, 
-            'last_name' => $request->last_name, 
-            'date_of_birth' => $request->date_of_birth, 
-            'date_of_death' => $request->date_of_death, 
-            'nationality' => $request->nationality, 
-            'biographic' => $request->biographic, 
-            'image' => 'authors/' . $filename .'.' . $extension, 
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'date_of_birth' => $request->date_of_birth,
+            'date_of_death' => $request->date_of_death,
+            'nationality' => $request->nationality,
+            'biographic' => $request->biographic,
+            'image' => 'authors/' . $filename .'.' . $extension,
         ];
 
         Author::insert_author($author);
@@ -75,13 +80,23 @@ class AuthorsController extends Controller
      */
     public function show(Author $author)
     {
-        $author = Author::select_author($author->id);
+        $author = Author::select_author($author->id)[0];
 
-        $author = $author[0];
+        $author->date_of_birth = Carbon::parse($author->date_of_birth)->format('d m Y');
+        if ($author->date_of_death != null)
+        {
+            $author->date_of_death = Carbon::parse($author->date_of_death)->format('d m Y');
+        }
+        else
+        {
+            $author->date_of_death = "Alive";
+        }
 
         $books = Author::select_author_with_count_of_books($author->id)[0]->book_count;
 
-        return view('authors.show', compact('author', 'books'));
+        $all_books = Author::select_authors_books($author->id);
+
+        return view('authors.show', compact('author', 'books', 'all_books'));
     }
 
     /**
@@ -117,13 +132,13 @@ class AuthorsController extends Controller
         $image = $request->file('image')->storeAs('public/authors', $filename .'.' . $extension);
 
         $new_author = [
-            'first_name' => $request->first_name, 
-            'last_name' => $request->last_name, 
-            'date_of_birth' => $request->date_of_birth, 
-            'date_of_death' => $request->date_of_death, 
-            'nationality' => $request->nationality, 
-            'biographic' => $request->biographic, 
-            'image' => 'authors/' . $filename .'.' . $extension, 
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'date_of_birth' => $request->date_of_birth,
+            'date_of_death' => $request->date_of_death,
+            'nationality' => $request->nationality,
+            'biographic' => $request->biographic,
+            'image' => 'authors/' . $filename .'.' . $extension,
         ];
 
         Author::update_author($new_author, $author->id);
@@ -138,6 +153,10 @@ class AuthorsController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        Storage::delete( 'public/' . $author->image );
+
+        Author::delete_author($author->id);
+
+        return redirect()->route('authors.index');
     }
 }

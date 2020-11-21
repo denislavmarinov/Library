@@ -48,10 +48,8 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 	// Route for read book up to page save in db
 	Route::put('/save_up_to_page/{book}', "BooksController@save_up_to_page")->name('save_up_to_page');
 
-	// Route group for everyone except plain users
-	Route::middleware(['not_plain_user'])->group(function () {
-		Route::resource('books', 'BooksController')->except('index', 'show');
-	});
+	Route::resource('books', 'BooksController')->except('index', 'show');
+
 	//  User routes which require only login
 	Route::get('users/change_user_image/', 'UsersController@change_user_image')->name('change_user_image');
 	Route::patch('users/change_user_image/', 'UsersController@change_user_image_action')->name('change_user_image_action');
@@ -76,11 +74,7 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 
 	//Route Authors Controller
 	Route::resource('/authors', 'AuthorsController');
-
-	// Notifications routes
-	Route::resource('/notifications', 'NotificationsController')->only('index');
-	Route::get('/user_dashboard', 'NotificationsController@index')->name('user_dashboard');
-	Route::get('/notification_seen/{id}', 'NotificationsController@notification_seen')->name('notification_seen');
-	Route::get('/mark_all_notifications_as_seen', 'NotificationsController@mark_all_notifications_as_seen')->name('mark_all_notifications_as_seen');
-
+	Route::get('/user_dashboard', function () {
+	    return view('user_dashboard.user_dashboard');
+	})->name('user_dashboard');
 });

@@ -214,4 +214,15 @@ class Book extends Model
                 ->orderBy('week_num', 'desc')
                 ->get();
     }
+
+    public static function get_user_speed_for_current_week ($user_id, $week_num, $year)
+    {
+         return DB::table('user_speeds')
+                ->where([
+                    ['user', '=', $user_id],
+                    ['week_num', '=', $week_num],
+                    ['year', '=', $year]
+            ])
+                ->get();
+    }
 }

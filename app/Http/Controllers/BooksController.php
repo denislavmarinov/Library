@@ -43,7 +43,16 @@ class BooksController extends Controller
         	$books = Book::get_all_books_with_authors_and_genres();
     	}
 
-        return view('books.index', compact('books'));
+        $read_speed = Book::get_user_speed_for_current_week(Auth::id(),Carbon::now()->weekOfYear, Carbon::now()->year );
+        if (isset($read_speed[0]))
+        {
+            $read_speed = $read_speed[0]->monday + $read_speed[0]->tuesday + $read_speed[0]->wednesday + $read_speed[0]->thursday + $read_speed[0]->friday + $read_speed[0]->saturday + $read_speed[0]->sunday;
+        }
+        else
+        {
+            $read_speed = 0;
+        }
+        return view('books.index', compact('books', 'read_speed'));
     }
 
     /**
@@ -53,21 +62,13 @@ class BooksController extends Controller
      */
     public function create()
     {
-    	// If the admin is uploading the book get all authors, otherwise the logged users name and id should be sent
-        if (Auth::user()->role_id == '3')
-        {
-            $authors = [Auth::id() => Auth::user()->first_name . ' ' . Auth::user()->last_name];
-        }
-        else
-        {
-            $authors = Author::get_all_authors();
+        $authors = Author::get_all_authors();
 
-            for ($i = 0; $i < count($authors); $i++)
-            {
-            	$authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
-            }
-            $authors = $authors_temp;
+        for ($i = 0; $i < count($authors); $i++)
+        {
+        	$authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
         }
+        $authors = $authors_temp;
 
         $genres = Genre::get_all_genres();
         $genres = $genres->pluck('genre', 'id');
@@ -139,20 +140,13 @@ class BooksController extends Controller
     {
         $book = Book::select_book_to_update($book->id);
 
-        if (Auth::user()->role_id == '3')
-        {
-            $authors = [Auth::id() => Auth::user()->first_name . ' ' . Auth::user()->last_name];
-        }
-        else
-        {
-            $authors = Author::get_all_authors();
+        $authors = Author::get_all_authors();
 
-            for ($i = 0; $i < count($authors); $i++)
-            {
-                $authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
-            }
-            $authors = $authors_temp;
+        for ($i = 0; $i < count($authors); $i++)
+        {
+            $authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
         }
+        $authors = $authors_temp;
 
         $genres = Genre::get_all_genres();
         $genres = $genres->pluck('genre', 'id');
@@ -305,7 +299,8 @@ class BooksController extends Controller
         // Get the pages read up to now in the book
         $read_pages_for_today_without_the_new_ones = Book::get_pages_since_now_for_today(Auth::id(), Carbon::now()->weekOfYear, lcfirst(Carbon::now()->isoFormat('dddd')), Carbon::now()->year);
         // If the user had not read book this week
-        if (empty($read_pages_for_today_without_the_new_ones[0])) {
+        if (empty($read_pages_for_today_without_the_new_ones[0]))
+        {
             // Make the row in db
             Book::create_new_row_at_user_speed_table(Auth::id(), Carbon::now()->weekOfYear, Carbon::now()->year);
             // Make array same as if the user had read some pages already

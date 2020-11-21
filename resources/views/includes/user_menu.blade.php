@@ -18,13 +18,7 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('authors.index') }}">All authors</a>
             <a class="dropdown-item" href="{{ route('authors.create') }}">Add author</a>
-            <a class="dropdown-item" href="#">Accept / Decline author</a>
-            <a class="dropdown-item" href="#">Prevent author from uploading new book</a>
         </div>
-    </li>
-    @else
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('authors.index') }}">Authors</a>
     </li>
     @endif
 
@@ -36,15 +30,6 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="{{ route('books.index') }}">All books</a>
-            <a class="dropdown-item" href="{{ route('books.create') }}">Add book</a>
-        </div>
-    </li>
-    @else
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="route('authors.show', Auth::id())">My books</a>
             <a class="dropdown-item" href="{{ route('books.index') }}">All books</a>
             <a class="dropdown-item" href="{{ route('books.create') }}">Add book</a>
         </div>
@@ -62,10 +47,6 @@
             <a class="dropdown-item" href="{{ route('genres.index') }}">All genres</a>
             <a class="dropdown-item" href="{{route('genres.create')}}">Add genre</a>
         </div>
-    </li>
-    @else
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('genres.index') }}">Genres</a>
     </li>
     @endif
 
