@@ -16,20 +16,33 @@
 		<th>Nationality</th>
 		@if(Auth::user()->role_id == 2)
 			<th>Edit</th>
+			<th>Delete</th>
 		@endif
 	</tr>
 	<tbody>
 @php
     $num = 1;
 @endphp
+@if (empty($authors[0]))
+	<tr>
+		<td colspan="6" class="text-center">No authors added in this app</td>
+	</tr>
+@endif
 @foreach( $authors as $author )
 	<tr>
 		<td>{{ $num++ }}</td>
 		<td><a href="{{ route('authors.show', $author->id) }}">{{ $author->author_name }}</a></td>
-		<td><a href="{{ route('authors.show', $author->date_of_birth) }}">{{ $author->date_of_birth }}</a></td>
+		<td style="color:#770202">{{ $author->date_of_birth }}</td>
 		<td><a href="{{ route('nationalities.show', $author->nationality) }}">{{ $author->nationality_name }}</a></td>
 		@if(Auth::user()->role_id == 2)
-			<td><a href="{{ route('authors.edit', $author->id) }}">Edit</a></td>
+			<td><a href="{{ route('authors.edit', $author->id) }}" class="btn btn-outline-orange">Edit</a></td>
+			<td>
+				<form action="{{ route('authors.destroy', $author->id) }}" method="post">
+					@csrf
+					@method('DELETE')
+					<input type="submit" name="submit" value="Delete" class="btn btn-outline-red">
+				</form>
+			</td>
 		@endif
 	</tr>
 @endforeach

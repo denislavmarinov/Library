@@ -6,6 +6,7 @@
     <h1 class="page_title">Reading speed</h1>
 @endsection
 @section('content')
+<br>
 <table class="table">
     <tr class="badge-success">
         <td>#</td>

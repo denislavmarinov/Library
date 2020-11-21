@@ -33,7 +33,7 @@
     </span>
 @endif
 {!! Form::label('date_of_birth', 'Birthday: ', ['class' => 'form-control-label']) !!}
-{!! Form::text('date_of_birth', old('date_of_birth'), ['class' => 'form-control']) !!}
+{!! Form::date('date_of_birth', old('date_of_birth'), ['class' => 'form-control']) !!}
 <br>
 <!-- Date of death -->
 @if ($errors->has('date_of_death'))
@@ -41,8 +41,14 @@
         <strong>{{ $errors->get('date_of_death')[0] }}</strong>
     </span>
 @endif
-{!! Form::label('date_of_death', 'Day of death: ', ['class' => 'form-control-label']) !!}
-{!! Form::text('date_of_death', old('date_of_death'), ['class' => 'form-control']) !!}
+{!! Form::radio('death_or_not', 'false',true, ['id' => 'alive']) !!}
+{!! Form::label('alive', "Alive") !!}
+<br>
+{!! Form::radio('death_or_not', 'true', false,  ['id' => 'death']) !!}
+{!! Form::label('death', "Death") !!}
+<div id='alive_div'>
+    <input type='hidden' value='' name='date_of_death'>
+</div>
 <br>
 <!-- Nationality -->
 @if ($errors->has('nationality'))
@@ -73,4 +79,20 @@
 <br>
 {!! Form::submit('Update author', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
+<script type="text/javascript">
+    $("input[name='death_or_not']").on('change', function(e) {
+        $('#death_div').remove();
+        $('#alive_div').remove();
+        e.preventDefault();
+        if ($(this).attr('id') == "alive"){
+            let str = "<div id='alive_div'><input type='hidden' value=' ' name='date_of_death'></div>" ;
+            $("form").append(str);
+            $('#death_div').remove();
+        }else{
+            let str = "<div id='death_div'><label for='date_of_death' class='form-control-label'>Day of death: </label><input class='form-control' name='date_of_death' type='date' id='date_of_death'><br></div>";
+            $("label[for='death']").after(str);
+            $('#alive_div').remove();
+        }
+    })
+</script>
 @endsection
