@@ -42,6 +42,9 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 		Route::resource('/nationalities', 'NationalitiesController')->except('index', 'show');
 	});
 
+	// Route for user speed
+	Route::get('/user_speed', 'BooksController@user_speed')->name('user_speed');
+
 	// Route for read book up to page save in db
 	Route::put('/save_up_to_page/{book}', "BooksController@save_up_to_page")->name('save_up_to_page');
 

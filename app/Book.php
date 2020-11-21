@@ -161,4 +161,57 @@ class Book extends Model
             ])
             ->update($data);
     }
+
+    public static function get_pages_since_now_for_today ($user, $weekNum, $dayType, $year)
+    {
+        return DB::table('user_speeds')
+                ->select($dayType, 'week_num', 'year')
+                ->where([
+                    ['user', '=', $user],
+                    ['week_num', '=', $weekNum],
+                    ['year', '=', $year]
+                ])
+                ->get();
+    }
+
+    public static function create_new_row_at_user_speed_table ($user_id, $week_num, $year)
+    {
+        return DB::table('user_speeds')
+                    ->insert([
+                        'monday' => 0,
+                        'tuesday' => 0,
+                        'wednesday' => 0,
+                        'thursday' => 0,
+                        'friday' => 0,
+                        'saturday' => 0,
+                        'sunday' => 0,
+                        'week_num' => $week_num,
+                        'user' => $user_id,
+                        'year' => $year,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ]);
+    }
+
+    public static function update_user_speed_for_today ($user_id, $pages, $weekNum, $dayType, $year)
+    {
+        return DB::table('user_speeds')
+                ->where([
+                    ['user', '=', $user_id],
+                    ['week_num', '=', $weekNum],
+                    ['year', '=', $year]
+                ])
+                ->update([
+                    $dayType => $pages,
+                ]);
+    }
+
+    public static function get_user_speed_list ($user_id)
+    {
+        return DB::table('user_speeds')
+                ->where('user', '=', $user_id)
+                ->orderBy('year', 'desc')
+                ->orderBy('week_num', 'desc')
+                ->get();
+    }
 }

@@ -9,22 +9,22 @@
 <br>
 <button class="btn btn-outline-teal" id="save_new_pages_read">Save your page, up to which you have read this book</button>
 <p>All book pages are: <strong>{{ $count_of_pages }}</strong></p>
-{!! Form::text('go_to_page', $user_page[0]->up_to_page, ['class' => 'form-control', 'id' => 'go_to_page']) !!}
+{!! Form::text('go_to_page', $user_page[0]->up_to_page == 0 ? 1 : $user_page[0]->up_to_page, ['class' => 'form-control', 'id' => 'go_to_page']) !!}
 <button id="go_to_page_btn" class="btn btn-outline-success">Go to page</button>
 <div class="content">
 	<div class="d-flex justify-content-center">
 		<button class="btn btn-outline-info previousBtn"> <- Previous</button>
-		<span style="margin-left: 15px; margin-right: 15px;" class="current_page">{{ $user_page[0]->up_to_page }}</span>
+		<span style="margin-left: 15px; margin-right: 15px;" class="current_page">{{ $user_page[0]->up_to_page == 0 ? 1 : $user_page[0]->up_to_page }}</span>
 		<button class="btn btn-outline-info nextBtn">Next -> </button>
 	</div>
 	<div>
 		@php
-			echo $all_pages_content[$user_page[0]->up_to_page];
+			echo $all_pages_content[$user_page[0]->up_to_page == 0 ? 1 : $user_page[0]->up_to_page];
 		@endphp
 	</div>
 	<div class="d-flex justify-content-center">
 		<button class="btn btn-outline-info previousBtn"> <- Previous</button>
-		<span style="margin-left: 15px; margin-right: 15px;" class="current_page">{{ $user_page[0]->up_to_page }}</span>
+		<span style="margin-left: 15px; margin-right: 15px;" class="current_page">{{ $user_page[0]->up_to_page == 0 ? 1 : $user_page[0]->up_to_page }}</span>
 		<button class="btn btn-outline-info nextBtn">Next -> </button>
 	</div>
 </div>
