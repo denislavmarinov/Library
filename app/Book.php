@@ -139,4 +139,26 @@ class Book extends Model
     {
          return DB::select(DB::raw('SELECT `id` FROM books_users WHERE `book` = :book_id AND `user` = :user_id'), ['book_id' => $book_id, 'user_id' => $user_id ]);
     }
+
+    public static function get_user_up_to_page ($user_id, $book_id)
+    {
+        return DB::table('books_users')
+                ->select('up_to_page')
+                ->where([
+                    ['book', '=', $book_id],
+                    ['user', '=', $user_id],
+                    ['read', '=', '0']
+                ])
+                ->get();
+    }
+
+    public static function update_up_to_page ($data, $book_id, $user_id)
+    {
+        return DB::table('books_users')
+            ->where([
+                ['book', '=', $book_id],
+                ['user', '=', $user_id],
+            ])
+            ->update($data);
+    }
 }

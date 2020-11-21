@@ -7,12 +7,12 @@ use App\Genre;
 use App\Author;
 use App\Wishlist;
 use Carbon\Carbon;
+use Pelago\Emogrifier;
 use Illuminate\Http\Request;
 use Spatie\PdfToText\Pdf;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
 class BooksController extends Controller
 {
     /**
@@ -139,10 +139,20 @@ class BooksController extends Controller
     {
         $book = Book::select_book_to_update($book->id);
 
-        $authors = Author::select_author($book->first()->author);
-        $authors = [
-            $authors[0]->id => $authors[0]->author_name
-        ];
+        if (Auth::user()->role_id == '3')
+        {
+            $authors = [Auth::id() => Auth::user()->first_name . ' ' . Auth::user()->last_name];
+        }
+        else
+        {
+            $authors = Author::get_all_authors();
+
+            for ($i = 0; $i < count($authors); $i++)
+            {
+                $authors_temp[$authors[$i]->id] = $authors[$i]->author_name;
+            }
+            $authors = $authors_temp;
+        }
 
         $genres = Genre::get_all_genres();
         $genres = $genres->pluck('genre', 'id');
@@ -254,15 +264,56 @@ class BooksController extends Controller
     }
     public function read_book (Book $book)
     {
+        $user_page = Book::get_user_up_to_page(Auth::id(), $book->id);
 
-        // $text = (new Pdf("C:\Program Files\Git\mingw64\bin\pdftotext"))
-        // ->setPdf(storage_path('app\public\books\autem_autem_id_laboriosam_voluptatem-1812233100.pdf'))
-        // ->text();
-        // echo "<pre>";
-        // echo $text;
-        // echo "</pre>";
+        $full_settings = [
+            'pdftohtml_path' => 'C:\poppler-0.68.0\bin\pdftohtml.exe', // path to pdftohtml
+            'pdfinfo_path' => 'C:\poppler-0.68.0\bin\pdfinfo.exe', // path to pdfinfo
+            'generate' => [ // settings for generating html
+                'singlePage' => false, // we want separate pages
+                'imageJpeg' => false, // we want png image
+                'ignoreImages' => false, // we need images
+                'zoom' => 1.75, // scale pdf
+                'noFrames' => false, // we want separate pages
+            ],
+            'clearAfter' => true, // auto clear output dir (if removeOutputDir==false then output dir will remain)
+            'removeOutputDir' => true, // remove output dir
+            'outputDir' => '/tmp/'.uniqid(), // output dir
+            'html' => [ // settings for processing html
+                'inlineCss' => true, // replaces css classes to inline css rules
+                'inlineImages' => true, // looks for images in html and replaces the src attribute to base64 hash
+                'onlyContent' => true, // takes from html body content only
+            ]
+        ];
+        $pdf = new \TonchikTm\PdfToHtml\Pdf(storage_path('app/public/' . $book->file_path), $full_settings);
 
-        return view('books.read_book');
+        // Get counted pages
+        $count_of_pages = $pdf->countPages();
+
+        // Get all pages content
+        $all_pages_content = $pdf->getHtml()->getAllPages();
+
+        return view('books.read_book', compact('user_page', 'count_of_pages', 'all_pages_content', 'book'));
+    }
+
+    public function save_up_to_page (Request $request, Book $book, Closure $next)
+    {
+        if ($request->up_to_page == $book->pages)
+        {
+            $data = [
+                'up_to_page' => $request->up_to_page,
+                'read' => '1'
+            ];
+        }
+        else
+        {
+            $data = [
+                'up_to_page' => $request->up_to_page
+            ];
+        }
+        Book::update_up_to_page($data, $book->id, Auth::id());
+
+        return $next($request);
     }
 
     public function readlist ()

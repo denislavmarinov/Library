@@ -51,7 +51,7 @@
     </span>
 @endif
 {!! Form::label('author', 'The book author: ', ['class' => 'form-control-label']) !!}
-{!! Form::select('author', $authors, old('auhhor'),  ['class' => 'custom-select', 'placeholder' => 'Choose author']) !!}
+{!! Form::select('author', $authors, old('auhhor'),  ['class' => 'custom-select']) !!}
 <br>
 <!-- Edition -->
 @if ($errors->has('edition'))
@@ -69,7 +69,7 @@
     </span>
 @endif
 {!! Form::label('genre', 'The book genre: ', ['class' => 'form-control-label']) !!}
-{!! Form::select('genre', $genres, old('genre'),  ['class' => 'custom-select', 'placeholder' => 'Choose genre']) !!}
+{!! Form::select('genre', $genres, old('genre'),  ['class' => 'custom-select']) !!}
 <br>
 <!-- File -->
 @if ($errors->has('book_file'))

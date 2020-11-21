@@ -62,3 +62,8 @@ body{
 .invalid-feedback{
     display: inline-block !important;
 }
+
+.badge-red {
+  color: #fff;
+  background-color: #f00;
+}

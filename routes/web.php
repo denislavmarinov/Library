@@ -42,6 +42,9 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 		Route::resource('/nationalities', 'NationalitiesController')->except('index', 'show');
 	});
 
+	// Route for read book up to page save in db
+	Route::put('/save_up_to_page/{book}', "BooksController@save_up_to_page")->name('save_up_to_page');
+
 	// Route group for everyone except plain users
 	Route::middleware(['not_plain_user'])->group(function () {
 		Route::resource('books', 'BooksController')->except('index', 'show');
@@ -70,7 +73,7 @@ Route::middleware(['auth', 'required_password_change'])->group(function() {
 
 	//Route Authors Controller
 	Route::resource('/authors', 'AuthorsController');
-	
+
 	// Notifications routes
 	Route::resource('/notifications', 'NotificationsController')->only('index');
 	Route::get('/user_dashboard', 'NotificationsController@index')->name('user_dashboard');
