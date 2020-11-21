@@ -17,17 +17,15 @@ class UserSpeedSeeder extends Seeder
         $friday = $faker->numberBetween(0, 300);
         $saturday = $faker->numberBetween(0, 300);
         $sunday = $faker->numberBetween(0, 300);
-        $pages_per_week = $monday + $tuesday + $wednsday + $thursday + $friday + $saturday + $sunday;
         return [
                 'monday' => $monday,
                 'tuesday' => $tuesday,
-                'wednsday' => $wednsday,
+                'wednesday' => $wednsday,
                 'thursday' => $thursday,
                 'friday' => $friday,
                 'saturday' => $saturday,
                 'sunday' => $sunday,
                 'week_num' => $faker->numberBetween(0, 52),
-                'pages_per_week' => $pages_per_week,
                 'user' => User::all()->random()->id
         ];
     }

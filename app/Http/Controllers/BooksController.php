@@ -8,8 +8,8 @@ use App\Author;
 use App\Wishlist;
 use Carbon\Carbon;
 use Pelago\Emogrifier;
-use Illuminate\Http\Request;
 use Spatie\PdfToText\Pdf;
+use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -296,8 +296,33 @@ class BooksController extends Controller
         return view('books.read_book', compact('user_page', 'count_of_pages', 'all_pages_content', 'book'));
     }
 
-    public function save_up_to_page (Request $request, Book $book, Closure $next)
+    public function save_up_to_page (Request $request, Book $book)
     {
+        // Get read pages from the book
+        $up_to_page_before_today = Book::get_user_up_to_page(Auth::id(), $book->id)[0]->up_to_page;
+        // Find the pages read today
+        $read_today = (int) $request->up_to_page - (int)$up_to_page_before_today;
+        // Get the pages read up to now in the book
+        $read_pages_for_today_without_the_new_ones = Book::get_pages_since_now_for_today(Auth::id(), Carbon::now()->weekOfYear, lcfirst(Carbon::now()->isoFormat('dddd')), Carbon::now()->year);
+        // If the user had not read book this week
+        if (empty($read_pages_for_today_without_the_new_ones[0])) {
+            // Make the row in db
+            Book::create_new_row_at_user_speed_table(Auth::id(), Carbon::now()->weekOfYear, Carbon::now()->year);
+            // Make array same as if the user had read some pages already
+            $read_pages_for_today_without_the_new_ones = [
+                lcfirst(Carbon::now()->isoFormat('dddd')) => 0,
+                'week_num' => Carbon::now()->weekOfYear,
+                'year' => Carbon::now()->year
+            ];
+        }
+        // The day of week, which is today
+        $today_type_day = lcfirst(Carbon::now()->isoFormat('dddd'));
+        // The pages read for today in all books
+        $pages_to_add_in_db = (int) $read_pages_for_today_without_the_new_ones[0]->$today_type_day + (int) $read_today;
+        // Save them in db
+        Book::update_user_speed_for_today(Auth::id(), $pages_to_add_in_db, Carbon::now()->weekOfYear, lcfirst(Carbon::now()->isoFormat('dddd')), Carbon::now()->year);
+
+        // Check is book is read
         if ($request->up_to_page == $book->pages)
         {
             $data = [
@@ -311,9 +336,22 @@ class BooksController extends Controller
                 'up_to_page' => $request->up_to_page
             ];
         }
+        // Save the book progress in db
         Book::update_up_to_page($data, $book->id, Auth::id());
 
-        return $next($request);
+        return redirect()->route('readlist');
+    }
+
+    public function user_speed ()
+    {
+        $user_speed = Book::get_user_speed_list(Auth::id());
+
+        $now = [
+            'week_num' => Carbon::now()->weekOfYear,
+            'year' => Carbon::now()->year
+        ];
+
+        return view('user_speed.list', compact('user_speed', 'now'));
     }
 
     public function readlist ()

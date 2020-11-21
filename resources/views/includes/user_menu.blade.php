@@ -97,7 +97,7 @@
         <a class="nav-link" href="{{ route('readlist') }}">Readlist</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Reading speed</a>
+        <a class="nav-link" href="{{ route('user_speed') }}">Reading speed</a>
     </li>
 
     <li class="nav-item">
