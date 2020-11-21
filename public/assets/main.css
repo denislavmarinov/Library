@@ -52,29 +52,6 @@ body{
     background-color: #f6993f;
     border-color: #f6993f;
 }
-/*Scrollbar*/
-::-webkit-scrollbar{
-    width: 10px;
-}
-::-webkit-scrollbar-track{
-    /*Should be changes only as an example*/
-    background: #2564f3;
-}
-
-::-webkit-scrollbar-thumb{
-    /*Should be changes only as an example*/
-    background: #f94ab3
-}
-
-::-webkit-scrollbar-thumb:hover{
-    /*Should be changes only as an example*/
-    background: #f00
-}
-
-::-webkit-scrollbar-button{
-    /*Should be changes only as an example*/
-    background: #5f2100;
-}
 
 /*Filters select and input fileds*/
 .filters{

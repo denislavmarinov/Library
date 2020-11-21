@@ -14,7 +14,6 @@ class WishlistSeeder extends Seeder
             return [
                 'book_id' => Book::all()->random()->id ,
                 'user_id' => User::all()->random()->id,
-                'deleted_at' => $faker->boolean(50) ? now() : null
             ];
     }
     /**

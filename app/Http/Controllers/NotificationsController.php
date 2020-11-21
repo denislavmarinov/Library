@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +15,23 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        // All notifications that user has not seen yet
-        $notifications = Notification::get_all_unreaded_notifiactions_for_user(Auth::id());
+        $notifications = null;
+        // $all_notifications = Notification::get_all_notifications();
+
+        // $reeded_notifications = Notification::get_all_readed_notifiactions_for_user(Auth::id());
+        // echo "<pre>";
+        // var_dump($all_notifications);
+        // echo "</pre>";
+        // echo "<br>";
+        // echo "<pre>";
+        // var_dump($reeded_notifications);
+        // echo "</pre>";
+
+        // foreach ($all_notifications as $notification) {
+        //     if () {
+
+        //     }
+        // }
 
         return view('user_dashboard.user_dashboard', compact('notifications'));
     }
@@ -79,7 +89,7 @@ class NotificationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

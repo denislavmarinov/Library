@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\GenresRequest;
 use Illuminate\Support\Facades\DB;
 
 class GenresController extends Controller
@@ -36,11 +37,14 @@ class GenresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GenresRequest $request)
     {
-        $genre = ['genre' => $request->genre,
-                'description' => $request->description
-                ];
+        $genre = [
+            'genre' => $request->genre,
+            'description' => $request->description,
+            'created_at' => now(),
+            'updated_at' => now()
+        ];
         DB::table('genres')->insert($genre);
 
         return redirect()->route('genres.index');
@@ -79,11 +83,13 @@ class GenresController extends Controller
      * @param  \App\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Genre $genre)
+    public function update(GenresRequest $request, Genre $genre)
     {
-        $updated_genre = ['genre' => $request->genre,
-                'description' => $request->description
-                ];
+        $updated_genre = [
+            'genre' => $request->genre,
+            'description' => $request->description,
+            'updated_at' => now()
+        ];
         DB::table('genres')->where('id', '=', $genre->id)->update($updated_genre);
 
         return redirect()->route('genres.show', $genre->id);

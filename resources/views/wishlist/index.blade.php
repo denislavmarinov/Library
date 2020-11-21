@@ -20,7 +20,7 @@
     @endphp
     @if ($wishlist->count() === 0)
         <tr>
-            <td colspan="5" class="text-center">No match!!!</td>
+            <td colspan="5" class="text-center">No books in wishlist!!!</td>
         </tr>
     @endif
     @foreach ($wishlist as $book)
@@ -28,7 +28,13 @@
             <td>{{ $num++ }}</td>
             <td><a href="{{ route('books.show', $book->id) }}">{{ $book->title }}</a></td>
             <td><a href="route('author.show', $book->author)"> {{ $book->first_name  }} {{$book->last_name}}</a> </td>
-            <td> <a href="" class="btn btn-outline-red">Remove from wishlist</a> </td>
+            <td>
+                <form action="{{route('wishlists.destroy', $book->wishlist)}}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <input type="submit" name="submit" value="Remove from wishlist" class="btn btn-outline-red">
+                </form>
+            </td>
             <td>
                     <form method="post" action="{{ route('start_reading', $book->id) }}">
                         @csrf

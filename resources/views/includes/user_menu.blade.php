@@ -69,15 +69,15 @@
     </li>
     @endif
 
-    @if( Auth::user()->role_id == '2')
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nationalities</a>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{{ route('nationalities.index') }}">All nationalities</a>
-            <a class="dropdown-item" href="{{ route('nationalities.create') }}">Add nationality</a>
+            @if( Auth::user()->role_id == '2')
+                <a class="dropdown-item" href="{{ route('nationalities.create') }}">Add nationality</a>
+            @endif
         </div>
     </li>
-    @endif
 
     @if (Auth::user()->role_id == '2')
     <li class="nav-item">
@@ -91,7 +91,7 @@
     </li>
     @endif
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('wishlist.index') }}">Wishlists</a>
+        <a class="nav-link" href="{{ route('wishlists.index') }}">Wishlists</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('readlist') }}">Readlist</a>
