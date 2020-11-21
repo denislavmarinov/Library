@@ -16,7 +16,7 @@
 <hr>
 <h2 class="text-center">Authors with this nationality</h2>
 <table class="table">
-    <tr class="badge-success">
+    <tr class="badge-red">
         <td>#</td>
         <td>Authors</td>
         <td>Nationality</td>

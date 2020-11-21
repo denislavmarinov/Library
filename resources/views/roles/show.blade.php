@@ -10,7 +10,7 @@
 $num = 1;
 @endphp
 <table class="table">
-	<tr>
+	<tr class="badge-red">
 		<td>#</td>
 		<td>First name</td>
 		<td>Last name</td>

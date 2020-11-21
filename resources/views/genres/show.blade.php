@@ -6,12 +6,13 @@
     <h1 class="page_title">Show genre</h1>
 @endsection
 @section('content')
-<h2>{{ $genre[0]->genre }}</h2>
-<p>{{ $genre[0]->description }}</p>
-
+<h2>Genre name: <strong>{{ $genre[0]->genre }}</strong></h2>
+<h2>Description: </h2>
+<p><strong>{{ $genre[0]->description }}</strong></p>
 <hr>
+<h2 class="text-center">Books in this genre</h2>
 <table class="table">
-    <tr>
+    <tr class="badge-red">
         <td>#</td>
         <td>Book name</td>
         <td>Book description</td>

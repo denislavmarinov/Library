@@ -14,7 +14,7 @@
 		<th>Author name</th>
 		<th>Date of birth</th>
 		<th>Nationality</th>
-		@if(Auth::user()->role_id == 2)	
+		@if(Auth::user()->role_id == 2)
 			<th>Edit</th>
 		@endif
 	</tr>
@@ -28,7 +28,7 @@
 		<td><a href="{{ route('authors.show', $author->id) }}">{{ $author->author_name }}</a></td>
 		<td><a href="{{ route('authors.show', $author->date_of_birth) }}">{{ $author->date_of_birth }}</a></td>
 		<td><a href="{{ route('nationalities.show', $author->nationality) }}">{{ $author->nationality_name }}</a></td>
-		@if(Auth::user()->role_id == 2)	
+		@if(Auth::user()->role_id == 2)
 			<td><a href="{{ route('authors.edit', $author->id) }}">Edit</a></td>
 		@endif
 	</tr>

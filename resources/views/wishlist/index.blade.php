@@ -8,7 +8,7 @@
 @section('content')
 <br>
 <table class="table">
-    <tr>
+    <tr class="badge-success">
         <td>#</td>
         <td>Book name</td>
         <td>Book author</td>

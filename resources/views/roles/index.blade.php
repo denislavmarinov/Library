@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <table class="table">
-    <tr>
+    <tr class="badge-success">
         <td>#</td>
         <td>Role name</td>
         <td>Users whit this role</td>

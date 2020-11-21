@@ -13,13 +13,13 @@
 		</div>
 		<div class="col-6">
 			<p>Biographic: </p>
-			<p>{{ $author->biographic }}</p>		
+			<p>{{ $author->biographic }}</p>
 		</div>
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-6">
-			<p>Books: {{ $books }}</p>
+			<p>Books count: {{ $books }}</p>
 			<p>Nationality: <a href="{{ route('nationalities.show', $author->nationality) }}"> {{ $author->nationality_name }}</a></p>
 			<p>Date of birthday: {{ $author->date_of_birth }}</p>
 			<p>Date of death: {{ $author->date_of_death }}</p>

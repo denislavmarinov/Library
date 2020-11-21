@@ -36,18 +36,18 @@ class WishlistController extends Controller
             'updated_at' => now()
         ];
 
-        $result = Wishlist::book_exist_in_wishlist($request->book_id, Auth::id());
-
-        if ($result)
-        {
-            return redirect()->back()->with(['message' => 'Book already exists in your wishlist!', 'type' =>'warning']);
-        }
-
         $result = Book::check_if_book_is_already_in_readlist($request->book_id, Auth::id());
 
         if ($result)
         {
             return redirect()->back()->with(['message' => 'Book already exists in your readlist! Go there and read it.', 'type' =>'warning']);
+        }
+
+        $result = Wishlist::book_exist_in_wishlist($request->book_id, Auth::id());
+
+        if ($result)
+        {
+            return redirect()->back()->with(['message' => 'Book already exists in your wishlist!', 'type' =>'warning']);
         }
 
         $result = Wishlist::add_book_to_wishlist($wishlist);
