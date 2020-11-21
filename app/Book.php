@@ -134,4 +134,9 @@ class Book extends Model
                     ->where('book', '=', $book, 'AND', 'user', '=', $user)
                     ->delete();
     }
+
+    public static function check_if_book_is_already_in_readlist ($book_id, $user_id)
+    {
+         return DB::select(DB::raw('SELECT `id` FROM books_users WHERE `book` = :book_id AND `user` = :user_id'), ['book_id' => $book_id, 'user_id' => $user_id ]);
+    }
 }

@@ -51,7 +51,7 @@ $num = 1;
 
       <!-- Modal footer -->
       <div class="modal-footer">
-      	{!! Form::submit('Change', ['class' => 'btn btn-outline-warning', 'form' => 'change_role_form']) !!}
+      	{!! Form::submit('Change', ['class' => 'btn btn-outline-orange', 'form' => 'change_role_form']) !!}
         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
       </div>
     </div>

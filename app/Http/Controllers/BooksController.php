@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Genre;
 use App\Author;
+use App\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\PdfToText\Pdf;
 use App\Http\Requests\BookRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -95,7 +97,9 @@ class BooksController extends Controller
             'edition' => $request->edition,
             'genre' => $request->genre,
             'file_path' => 'books/' . $filename .'.' . $extension,
-            'added_by' => Auth::user()->id
+            'added_by' => Auth::user()->id,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
 
         $result = Book::add_new_book($book);
@@ -171,7 +175,8 @@ class BooksController extends Controller
             'file_path' => 'books/' . $filename .'.' . $extension,
             'author' => $request->author,
             'edition' => $request->edition,
-            'genre' => $request->genre
+            'genre' => $request->genre,
+            'updated_at' => now()
         ];
 
         $result = Book::update_book($book->id, $updated_book);
@@ -211,14 +216,29 @@ class BooksController extends Controller
 
     public function start_reading (Book $book)
     {
+        $result = Wishlist::book_exist_in_wishlist($book->id, Auth::id());
+        if($result)
+        {
+            Wishlist::delete_book_from_wishlist($result[0]->id);
+        }
+
         $book_user = [
             'book' => $book->id,
             'user' => Auth::id(),
             'up_to_page' => '0',
             'started_to_read' => now(),
             'ended_to_read' => null,
-            'read' => '0'
+            'read' => '0',
+            'created_at' => now(),
+            'updated_at' => now()
         ];
+
+        $result = Book::check_if_book_is_already_in_readlist($book->id, Auth::id());
+
+        if($result)
+        {
+            return redirect()->back()->with(['message' => 'Book is already in your readlist!', 'type' =>'warning']);
+        }
 
         $result = Book::add_book_to_readlist($book_user);
 
@@ -234,6 +254,14 @@ class BooksController extends Controller
     }
     public function read_book (Book $book)
     {
+
+        // $text = (new Pdf("C:\Program Files\Git\mingw64\bin\pdftotext"))
+        // ->setPdf(storage_path('app\public\books\autem_autem_id_laboriosam_voluptatem-1812233100.pdf'))
+        // ->text();
+        // echo "<pre>";
+        // echo $text;
+        // echo "</pre>";
+
         return view('books.read_book');
     }
 

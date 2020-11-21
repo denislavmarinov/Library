@@ -49,6 +49,8 @@ class UsersController extends Controller
             'user_id' => $request->user_id,
             'change' => 1,
             'asked_by' => Auth::id(),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
 
         $result = User::require_change_password($data);
