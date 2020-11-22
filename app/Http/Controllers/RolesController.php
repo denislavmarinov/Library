@@ -17,7 +17,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::with('user')->get();
+        $roles = Role::with('users')->get();
 
         return view('roles.index', compact('roles'));
     }

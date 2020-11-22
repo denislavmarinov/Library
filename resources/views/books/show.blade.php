@@ -24,10 +24,14 @@
 		</div>
 		<div class="col-4 offset-2">
 			<div class="row">
-				<div class="col-3">
-					<a href="" class="btn btn-outline-teal">Add to wishlist</a>
+				<div class="col-6">
+					<form method="post" action="{{ route('wishlists.store') }}">
+	                    @csrf
+	                    <input type="hidden" name="book_id" value="{{$book->id}}">
+	                    <input type="submit" name="submit" value="Add to wishlist" class="btn btn-outline-teal">
+	                </form>
 				</div>
-				<div class="col-3">
+				<div class="col-6">
 					<form method="post" action="{{ route('start_reading', $book->id) }}">
 						@csrf
 						<input type="submit" name="submit" value="Start reading" class="btn btn-outline-cyan">

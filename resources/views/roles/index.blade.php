@@ -19,7 +19,7 @@
         <tr>
             <td>{{ $num++ }}</td>
             <td><a href="{{ route('roles.show', $role->id) }}">{{ucfirst(str_replace('_', ' ', $role->role )) }}</a></td>
-            <td>{{ $role->user->count() }}</td>
+            <td>{{ $role->users->count() }}</td>
         </tr>
     @endforeach
 </table>

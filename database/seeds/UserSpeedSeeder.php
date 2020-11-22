@@ -26,6 +26,7 @@ class UserSpeedSeeder extends Seeder
                 'saturday' => $saturday,
                 'sunday' => $sunday,
                 'week_num' => $faker->numberBetween(0, 52),
+                'year' => $faker->numberBetween(2000, 2020),
                 'user' => User::all()->random()->id
         ];
     }
