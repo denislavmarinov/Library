@@ -51,7 +51,9 @@ class NationalitiesController extends Controller
         $nationality = [
             'nationality' => $request->nationality,
             'history_link' => $request->history_link,
-            'flag' => 'flags/'. $flag_name .'.' . $flag_extension
+            'flag' => 'flags/'. $flag_name .'.' . $flag_extension,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
         DB::table('nationalities')->insert($nationality);
 
@@ -107,10 +109,13 @@ class NationalitiesController extends Controller
         $flag_path = $request->file('flag')->storeAs('public/flags', $flag_name .'.' . $flag_extension);
 
 
-        $updated_nationality = ['nationality' => $request->nationality,
-                                'history_link' => $request->history_link,
-                                'flag' => 'flags/'. $flag_name .'.' . $flag_extension
-                                ];
+        $updated_nationality = [
+            'nationality' => $request->nationality,
+            'history_link' => $request->history_link,
+            'flag' => 'flags/'. $flag_name .'.' . $flag_extension,
+            'updated_at' => now()
+        ];
+
         DB::table('nationalities')->where('id', '=', $nationality->id)->update($updated_nationality);
 
         return redirect()->route('nationalities.show', $nationality->id)->with([

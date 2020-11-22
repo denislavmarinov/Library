@@ -67,6 +67,8 @@ class AuthorsController extends Controller
             'nationality' => $request->nationality,
             'biographic' => $request->biographic,
             'image' => 'authors/' . $filename .'.' . $extension,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
 
         Author::insert_author($author);
@@ -145,6 +147,7 @@ class AuthorsController extends Controller
             'nationality' => $request->nationality,
             'biographic' => $request->biographic,
             'image' => 'authors/' . $filename .'.' . $extension,
+            'updated_at' => now()
         ];
 
         Author::update_author($new_author, $author->id);
