@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Nationality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AuthorsRequest;
 use Illuminate\Support\Facades\Storage;
 
 class AuthorsController extends Controller
@@ -49,7 +50,7 @@ class AuthorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthorsRequest $request)
     {
         $extension = $request->file('image')->getClientOriginalExtension();
 
@@ -123,7 +124,7 @@ class AuthorsController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(AuthorsRequest $request, Author $author)
     {
         $extension = $request->file('image')->getClientOriginalExtension();
 
