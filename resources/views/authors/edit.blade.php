@@ -89,7 +89,7 @@
             $("form").append(str);
             $('#death_div').remove();
         }else{
-            let str = "<div id='death_div'><label for='date_of_death' class='form-control-label'>Day of death: </label><input class='form-control' name='date_of_death' type='date' id='date_of_death'><br></div>";
+            let str = "<div id='death_div'><label for='date_of_death' class='form-control-label'>Day of death: </label><input class='form-control' name='date_of_death' type='date' id='date_of_death' value='{{$author[0]->date_of_death}}'><br></div>";
             $("label[for='death']").after(str);
             $('#alive_div').remove();
         }
