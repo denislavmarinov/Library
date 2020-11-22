@@ -14,6 +14,7 @@
 		<th>Nationality</th>
 		@if(Auth::user()->role_id == 2)
 			<th>Edit</th>
+			<th>Delete</th>
 		@endif
 	</tr>
 	<tbody>
@@ -26,7 +27,14 @@
 		<td><a href="{{ $nationality->history_link }}" target="__blank"><img width="50px" src="{{ asset('storage/' . $nationality->flag) }}"></a></td>
 		<td><a href="{{ route('nationalities.show', $nationality->id) }}">{{ $nationality->nationality }}</a></td>
 		@if(Auth::user()->role_id == 2)
-			<td><a href="{{ route('nationalities.edit', $nationality->id) }}">Edit</a></td>
+			<td><a href="{{ route('nationalities.edit', $nationality->id) }}" class="btn btn-outline-orange">Edit</a></td>
+			<td>
+				<form action="{{ route('nationalities.destroy', $nationality->id) }}" action="post">
+						@csrf
+						@method('DELETE')
+						<input type="submit" name="submit" value="Delete" class="btn btn-outline-red">
+				</form>
+			</td>
 		@endif
 	</tr>
 @endforeach

@@ -14,7 +14,7 @@
 		<th>Description</th>
 		@if(Auth::user()->role_id == 2)
 			<th>Edit</th>
-		@endif	
+		@endif
 	</tr>
 	<tbody>
 @php
@@ -26,8 +26,8 @@
 		<td><a href="{{ route('genres.show', $genre->id) }}">{{ $genre->genre }}</a></td>
 		<td>{{ $genre->description }}</td>
 		@if(Auth::user()->role_id == 2)
-			<td><a href="{{ route('genres.edit', $genre->id) }}">Edit</a></td>
-		@endif	
+			<td><a href="{{ route('genres.edit', $genre->id) }}" class="btn btn-outline-orange">Edit</a></td>
+		@endif
 	</tr>
 @endforeach
 

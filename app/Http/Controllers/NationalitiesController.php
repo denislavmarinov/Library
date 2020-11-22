@@ -55,7 +55,10 @@ class NationalitiesController extends Controller
         ];
         DB::table('nationalities')->insert($nationality);
 
-        return redirect()->route('nationalities.index');
+        return redirect()->route('nationalities.index')->with([
+            'message' => 'Successfully added nationality!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -108,7 +111,10 @@ class NationalitiesController extends Controller
                                 ];
         DB::table('nationalities')->where('id', '=', $nationality->id)->update($updated_nationality);
 
-        return redirect()->route('nationalities.show', $nationality->id);
+        return redirect()->route('nationalities.show', $nationality->id)->with([
+            'message' => 'Successfully edited nationality!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -123,6 +129,9 @@ class NationalitiesController extends Controller
 
         Nationality::delete_nationality($nationality->id);
 
-        return redirect()->route('nationalities.index');
+        return redirect()->route('nationalities.index')->with([
+            'message' => 'Successfully deleted nationality!',
+            'type' => 'success'
+        ]);
     }
 }

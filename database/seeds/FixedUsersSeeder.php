@@ -24,17 +24,6 @@ class FixedUsersSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'first_name' => 'Author',
-                'last_name' => 'Authorski',
-                'role_id' => '3',
-                'image' => null,
-                'email' => 'author@example.com',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-                'logged' => '0',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'first_name' => 'Admin',
                 'last_name' => 'Adminov',
                 'role_id' => '2',

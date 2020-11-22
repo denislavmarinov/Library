@@ -47,7 +47,10 @@ class GenresController extends Controller
         ];
         DB::table('genres')->insert($genre);
 
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index')->with([
+            'message' => 'Successfully added genre!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -92,7 +95,10 @@ class GenresController extends Controller
         ];
         DB::table('genres')->where('id', '=', $genre->id)->update($updated_genre);
 
-        return redirect()->route('genres.show', $genre->id);
+        return redirect()->route('genres.show', $genre->id)->with([
+            'message' => 'Successfully edited genre!',
+            'type' => 'success'
+        ]);
     }
 
 

@@ -10,13 +10,8 @@
 	<h2 class="text-center">Title: {{ ucfirst($book->title) }}</h2>
 	<hr>
 	<div class="row">
-		<div class="col-6">
-			<p>Image 250 x 250</p>
-		</div>
-		<div class="col-6">
-			<p>Description: </p>
-			<p>{{ $book->short_content }}</p>
-		</div>
+		<p>Description: </p>
+		<p>{{ $book->short_content }}</p>
 	</div>
 	<hr>
 	<div class="row">
