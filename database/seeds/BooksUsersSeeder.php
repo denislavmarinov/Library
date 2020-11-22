@@ -31,7 +31,7 @@ class BooksUsersSeeder extends Seeder
 
         return [
                 'book'  => $book_id,
-                'user'  => User::all()->random()->id,
+                'user'  => rand(1, 2),
                 'up_to_page'    => $up_to_page,
                 'started_to_read'   => $faker->date('Y-m-d', now()),
                 'ended_to_read' => $ended_to_read,
@@ -43,7 +43,7 @@ class BooksUsersSeeder extends Seeder
      *
      * @return void
      */
-    public function run($num = 500, Faker $faker)
+    public function run($num = 50, Faker $faker)
     {
         for ($i = 0; $i < $num; $i++)
         {
