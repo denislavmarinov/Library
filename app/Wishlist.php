@@ -12,12 +12,12 @@ class Wishlist extends Model
 {
     protected $fillable = ['book_id', 'user_id', 'deleted_at'];
 
-    public function user ()
+    public function users ()
     {
         return $this->hasMany('App\User');
     }
 
-    public function book ()
+    public function books ()
     {
         return $this->hasMany('App\Book');
     }

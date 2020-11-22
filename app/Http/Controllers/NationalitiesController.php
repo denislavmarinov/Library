@@ -98,6 +98,8 @@ class NationalitiesController extends Controller
      */
     public function update(NationalitiesRequest $request, Nationality $nationality)
     {
+        Storage::delete( 'public/' . $nationality->flag );
+
         $flag_extension = $request->file('flag')->getClientOriginalExtension();
 
         $flag_name = str_replace(' ', '_', $request->nationality);

@@ -14,7 +14,7 @@ class Book extends Model
         return $this->hasOne('App\Genre');
     }
 
-    public function user ()
+    public function users ()
     {
         return $this->hasMany('App\User');
     }
@@ -22,11 +22,6 @@ class Book extends Model
     public function author ()
     {
         return $this->hasOne('App\Author');
-    }
-
-    public function notification ()
-    {
-        return $this->hasMany('App\Notification');
     }
 
     public function wishlist ()

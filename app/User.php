@@ -39,28 +39,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function notification ()
-    {
-        return $this->hasMany('App\Notification');
-    }
-
-    public function book ()
+    public function books ()
     {
         return $this->hasMany('App\Book');
     }
 
     public function role ()
     {
-        return $this->hasOne('App\Role');
+        return $this->belongsTo('App\Role');
     }
 
 
-    public function user_speed ()
+    public function user_speeds ()
     {
         return $this->hasMany('App\User_speed');
     }
 
-    public function wishlist ()
+    public function wishlists ()
     {
         return $this->hasMany('App\Wishlist');
     }

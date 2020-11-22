@@ -1,9 +1,9 @@
 @php
-    $title = "Update author";
+    $title = "Edit author";
  @endphp
 @extends('layouts.main')
 @section('title')
-    <h1 class="page_title">Update author</h1>
+    <h1 class="page_title">Edit author</h1>
 @endsection
 @section('content')
 <br>
@@ -77,7 +77,7 @@
 {!! Form::label('image', 'Image: ', ['class' => 'form-control-label']) !!}
 {!! Form::file('image', ['class' => 'form-control-file']) !!}
 <br>
-{!! Form::submit('Update author', ['class' => 'btn btn-outline-teal']) !!}
+{!! Form::submit('Edit author', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
 <script type="text/javascript">
     $("input[name='death_or_not']").on('change', function(e) {

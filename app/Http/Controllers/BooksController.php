@@ -163,6 +163,7 @@ class BooksController extends Controller
      */
     public function update(BookRequest $request, Book $book)
     {
+        Storage::delete('public/' . $book->file_path);
         $extension = $request->file('book_file')->getClientOriginalExtension();
 
         $filename = str_replace(' ', '_', $request->title) . '-' . rand();

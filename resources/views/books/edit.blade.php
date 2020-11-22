@@ -1,9 +1,9 @@
 @php
-    $title = "Update book";
+    $title = "Edit book";
  @endphp
 @extends('layouts.main')
 @section('title')
-    <h1 class="page_title">Update book</h1>
+    <h1 class="page_title">Edit book</h1>
 @endsection
 @section('content')
 <br>
@@ -80,6 +80,6 @@
 {!! Form::label('book_file', 'The book: ', ['class' => 'form-control-label']) !!}
 {!! Form::file('book_file', ['class' => 'form-control-file']) !!}
 <br>
-{!! Form::submit('Update book', ['class' => 'btn btn-outline-teal']) !!}
+{!! Form::submit('Edit book', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
 @endsection

@@ -129,6 +129,8 @@ class AuthorsController extends Controller
      */
     public function update(AuthorsRequest $request, Author $author)
     {
+        Storage::delete( 'public/' . $author->image );
+
         $extension = $request->file('image')->getClientOriginalExtension();
 
         $filename = str_replace(' ', '', $request->first_name) . '_' . str_replace(' ', '', $request->last_name) . '-' . rand();
