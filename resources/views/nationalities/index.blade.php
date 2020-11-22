@@ -29,7 +29,7 @@
 		@if(Auth::user()->role_id == 2)
 			<td><a href="{{ route('nationalities.edit', $nationality->id) }}" class="btn btn-outline-orange">Edit</a></td>
 			<td>
-				<form action="{{ route('nationalities.destroy', $nationality->id) }}" action="post">
+				<form action="{{ route('nationalities.destroy', $nationality->id) }}" method="post">
 						@csrf
 						@method('DELETE')
 						<input type="submit" name="submit" value="Delete" class="btn btn-outline-red">

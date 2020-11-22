@@ -38,7 +38,7 @@
 			@if(Auth::user()->role_id == 2)
 			<div class="row">
 				<div class="col-3">
-					<a href="{{route('books.edit', $book->id) }}" class="btn btn-outline-orange">Update</a>
+					<a href="{{route('books.edit', $book->id) }}" class="btn btn-outline-orange">Edit</a>
 				</div>
 				<div class="col-3">
 					<form action="{{route('books.destroy', $book->id) }}" method="post">

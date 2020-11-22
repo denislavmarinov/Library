@@ -33,6 +33,6 @@
 {!! Form::label('flag', 'Flag: ', ['class' => 'form-control-label']) !!}
 {!! Form::file('flag', ['class' => 'form-control-file']) !!}
 <br>
-{!! Form::submit('Update nationality', ['class' => 'btn btn-outline-teal']) !!}
+{!! Form::submit('Edit nationality', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
 @endsection

@@ -11,10 +11,10 @@ class Author extends Model
 
     public function nationality ()
     {
-        return $this->hasOne('App\Nationality');
+        return $this->belongsTo('App\Nationality');
     }
 
-    public function book ()
+    public function books ()
     {
         return $this->hasMany('App\Book');
     }

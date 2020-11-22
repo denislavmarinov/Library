@@ -25,7 +25,7 @@ class GenresRequest extends FormRequest
     {
         return [
             'genre' => 'required|min:3|max:60',
-            'description' => 'required|min:10|max:200'
+            'description' => 'required|min:10|max:1000'
         ];
     }
 }
