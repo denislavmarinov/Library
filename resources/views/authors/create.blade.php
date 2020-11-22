@@ -67,7 +67,7 @@
 @endif
 {!! Form::label('biographic', 'The biogprahic author:', ['class' => 'form-control-label']) !!}
 {!! Form::textarea('biographic', old('biographic'), ['class' => 'form-control']) !!}
-<br><br>
+<br>
 <!-- Image -->
 @if ($errors->has('image'))
     <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
 {!! Form::label('image', 'Image: ', ['class' => 'form-control-label']) !!}
 {!! Form::file('image', ['class' => 'form-control-file']) !!}
 <br>
-{!! Form::submit('Update author', ['class' => 'btn btn-outline-teal']) !!}
+{!! Form::submit('Add author', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
 <script type="text/javascript">
     $("input[name='death_or_not']").on('change', function(e) {
