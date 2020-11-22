@@ -309,6 +309,8 @@ class BooksController extends Controller
         $read_today = (int) $request->up_to_page - (int)$up_to_page_before_today;
         // Get the pages read up to now in the book
         $read_pages_for_today_without_the_new_ones = Book::get_pages_since_now_for_today(Auth::id(), Carbon::now()->weekOfYear, lcfirst(Carbon::now()->isoFormat('dddd')), Carbon::now()->year);
+        // The day of week, which is today
+        $today_type_day = lcfirst(Carbon::now()->isoFormat('dddd'));
         // If the user had not read book this week
         if (!isset($read_pages_for_today_without_the_new_ones[0]))
         {
@@ -321,10 +323,16 @@ class BooksController extends Controller
                 'year' => Carbon::now()->year
             ];
         }
-        // The day of week, which is today
-        $today_type_day = lcfirst(Carbon::now()->isoFormat('dddd'));
+        else
+        {
+            $read_pages_for_today_without_the_new_ones = [
+                lcfirst(Carbon::now()->isoFormat('dddd')) => $read_pages_for_today_without_the_new_ones[0]->$today_type_day,
+                'week_num' => $read_pages_for_today_without_the_new_ones[0]->week_num,
+                'year' => $read_pages_for_today_without_the_new_ones[0]->year
+            ];
+        }
         // The pages read for today in all books
-        $pages_to_add_in_db = (int) $read_pages_for_today_without_the_new_ones[0]->$today_type_day + (int) $read_today;
+        $pages_to_add_in_db = (int) $read_pages_for_today_without_the_new_ones[$today_type_day] + (int) $read_today;
         // Save them in db
         Book::update_user_speed_for_today(Auth::id(), $pages_to_add_in_db, Carbon::now()->weekOfYear, lcfirst(Carbon::now()->isoFormat('dddd')), Carbon::now()->year);
 
