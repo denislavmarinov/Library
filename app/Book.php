@@ -85,7 +85,7 @@ class Book extends Model
         return DB::table('books')
                 ->join('authors', 'books.author', '=', 'authors.id')
                 ->join('genres', 'books.genre', '=', 'genres.id')
-                ->select('books.id', 'books.title', 'books.short_content', 'books.isbn', 'books.pages', 'books.edition', 'genres.genre','books.genre as genre_id', 'books.author', 'authors.first_name', 'authors.last_name', 'authors.user_id as author_id')
+                ->select('books.id', 'books.title', 'books.short_content', 'books.isbn', 'books.pages', 'books.edition', 'genres.genre','books.genre as genre_id', 'books.author', 'authors.first_name', 'authors.last_name')
                 ->where('books.id', '=', $id)
                 ->get();
     }

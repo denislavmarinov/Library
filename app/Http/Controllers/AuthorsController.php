@@ -70,7 +70,10 @@ class AuthorsController extends Controller
         ];
 
         Author::insert_author($author);
-        return redirect()->route('authors.index')->with(['message' => 'Successfully added author!', 'type' =>'success']);
+        return redirect()->route('authors.index')->with(['message' => 'Successfully added author!', 'type' =>'success'])->with([
+            'message' => 'Successfully added author!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -143,7 +146,10 @@ class AuthorsController extends Controller
         ];
 
         Author::update_author($new_author, $author->id);
-        return redirect()->route('authors.index')->with(['message' => 'Successfully added author!', 'type' =>'success']);
+        return redirect()->route('authors.index')->with(['message' => 'Successfully added author!', 'type' =>'success'])->with([
+            'message' => 'Successfully edited author!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -158,6 +164,9 @@ class AuthorsController extends Controller
 
         Author::delete_author($author->id);
 
-        return redirect()->route('authors.index');
+        return redirect()->route('authors.index')->with([
+            'message' => 'Successfully deleted author!',
+            'type' => 'success'
+        ]);
     }
 }

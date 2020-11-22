@@ -26,6 +26,6 @@
 {!! Form::label('description', 'Description: ', ['class' => 'form-control-label']) !!}
 {!! Form::textarea('description', $genre->description, ['placeholder' => 'description', 'class' => 'form-control']) !!}
 <br>
-{!! Form::submit('Add genre', ['class' => 'btn btn-outline-teal']) !!}
+{!! Form::submit('Update genre', ['class' => 'btn btn-outline-teal']) !!}
 {!! Form::close() !!}
 @endsection
